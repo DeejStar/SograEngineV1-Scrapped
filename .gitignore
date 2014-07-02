@@ -1,0 +1,9 @@
+*.class
+
+# Archives #
+*.jar
+*.war
+*.ear
+
+# Crash logs #
+hs_err_pid*
