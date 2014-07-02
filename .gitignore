@@ -7,3 +7,12 @@
 
 # Crash logs #
 hs_err_pid*
+
+bin/
+libs/
+war/WEB-INF/lib/
+
+.classpath
+.project
+.settings/
+.res/
