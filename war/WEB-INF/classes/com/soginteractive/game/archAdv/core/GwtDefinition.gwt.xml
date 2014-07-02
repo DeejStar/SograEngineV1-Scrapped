@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+    <entry-point class="com.soginteractive.game.archAdv.core.client.GwtLauncher"/>
+    <set-configuration-property name="gdx.assetpath" value="../ArchengeiaAdventures-android/assets"/>
+    <inherits name="GameMain"/>
+    <inherits name="aurelienribon.bodyeditorloader"/>
+    <inherits name="aurelienribon.tweenengine"/>
+    <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt"/>
+</module>
