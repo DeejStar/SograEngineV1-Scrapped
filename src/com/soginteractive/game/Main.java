@@ -2,7 +2,7 @@ package com.soginteractive.game;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.soginteractive.game.GameMain;
+import com.soginteractive.game.archAdv.core.GameMain;
 
 public class Main {
 	public static void main(String[] args) {

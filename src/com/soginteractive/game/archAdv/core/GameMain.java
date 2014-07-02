@@ -1,4 +1,4 @@
-package com.soginteractive.game;
+package com.soginteractive.game.archAdv.core;
 
 import static com.soginteractive.engine.globals.Globals.DEV_MODE;
 
