@@ -9,11 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.soginteractive.game.archAdv.core.GameMain;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
@@ -26,17 +22,22 @@ public class Main extends JFrame {
 		LwjglAWTCanvas canvas = new LwjglAWTCanvas(new EditorMain());
 		container.add(canvas.getCanvas(), BorderLayout.CENTER);
 
-		JPanel panel = new JPanel(new GridLayout(2, 4));
+		JPanel panel = new JPanel(new GridLayout(6, 1));
 
-		JButton button = new JButton("Sex is good");
-		JButton button2 = new JButton("But Food is Better.");
-		//JButton button3 = new JButton("Aye, Aye, Aye.");
-		button.setSize(25, 50);
-		// button.setVisible(true);
+		JButton mainButton = new JButton("Main Screen");
+		JButton characterButton = new JButton("Character Screen");
+		JButton enemyButton = new JButton("Enemy Screen");
+		JButton equipmentButton = new JButton("Equipment Screen");
+		JButton eventButton = new JButton("Event Screen");
+		JButton menuScreen = new JButton("Menu Screen");
 
-		panel.add(button);
-		panel.add(button2);
-		//panel.add(button3);
+		panel.add(mainButton);
+		panel.add(characterButton);
+		panel.add(enemyButton);
+		panel.add(equipmentButton);
+		panel.add(eventButton);
+		panel.add(menuScreen);
+
 		container.add(panel, BorderLayout.WEST);
 
 		pack();
