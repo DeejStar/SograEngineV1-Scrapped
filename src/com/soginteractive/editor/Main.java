@@ -10,11 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
+import com.badlogic.gdx.utils.Array;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
+	private Array<JButton> buttons;
+
 	public Main() {
+		buttons = new Array<JButton>();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final Container container = getContentPane();
 		container.setLayout(new BorderLayout());
@@ -22,21 +27,16 @@ public class Main extends JFrame {
 		LwjglAWTCanvas canvas = new LwjglAWTCanvas(new EditorMain());
 		container.add(canvas.getCanvas(), BorderLayout.CENTER);
 
-		JPanel panel = new JPanel(new GridLayout(6, 1));
+		createNewButton("Main Screen");
+		createNewButton("Character Screen");
+		createNewButton("Enemy Screen");
+		createNewButton("Equipment Screen");
+		createNewButton("Event Screen");
+		createNewButton("Menu Screen");
 
-		JButton mainButton = new JButton("Main Screen");
-		JButton characterButton = new JButton("Character Screen");
-		JButton enemyButton = new JButton("Enemy Screen");
-		JButton equipmentButton = new JButton("Equipment Screen");
-		JButton eventButton = new JButton("Event Screen");
-		JButton menuScreen = new JButton("Menu Screen");
+		JPanel panel = new JPanel(new GridLayout(buttons.size, 1));
 
-		panel.add(mainButton);
-		panel.add(characterButton);
-		panel.add(enemyButton);
-		panel.add(equipmentButton);
-		panel.add(eventButton);
-		panel.add(menuScreen);
+		addButtonsToPanel(buttons, panel);
 
 		container.add(panel, BorderLayout.WEST);
 
@@ -53,5 +53,39 @@ public class Main extends JFrame {
 				new Main();
 			}
 		});
+	}
+
+	private void createNewButton() {
+		createNewButton("");
+	}
+
+	private void createNewButton(String text) {
+		addButtonToArray(new JButton(text));
+	}
+
+	private void addButtonToArray(JButton button) {
+		if (buttons != null) {
+			buttons.add(button);
+		}
+	}
+
+	private void removeButtonFromArray() {
+		for (int i = 0; i < buttons.size; i++) {
+			removeButtonFromArray(i);
+		}
+	}
+
+	private void removeButtonFromArray(int index) {
+		buttons.removeIndex(index);
+	}
+
+	private void addButtonsToPanel(Array<JButton> buttons, JPanel panel) {
+		JButton button;
+		for (int i = 0; i < buttons.size; i++) {
+			button = buttons.get(i);
+			if (button != null) {
+				panel.add(button);
+			}
+		}
 	}
 }
