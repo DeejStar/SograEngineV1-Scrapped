@@ -11,14 +11,14 @@ import javax.swing.SwingUtilities;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
 import com.badlogic.gdx.utils.Array;
+import com.soginteractive.editor.util.ButtonManager;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
-	private Array<JButton> buttons;
+	private ButtonManager buttonManager;
 
 	public Main() {
-		buttons = new Array<JButton>();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final Container container = getContentPane();
@@ -27,16 +27,16 @@ public class Main extends JFrame {
 		LwjglAWTCanvas canvas = new LwjglAWTCanvas(new EditorMain());
 		container.add(canvas.getCanvas(), BorderLayout.CENTER);
 
-		createNewButton("Main Screen");
-		createNewButton("Character Screen");
-		createNewButton("Enemy Screen");
-		createNewButton("Equipment Screen");
-		createNewButton("Event Screen");
-		createNewButton("Menu Screen");
+		buttonManager = new ButtonManager("Buttons");
 
-		JPanel panel = new JPanel(new GridLayout(buttons.size, 1));
+		buttonManager.button("Main Screen").button("Character Screen")
+				.button("Enemy Screen").button("Equipment Screen")
+				.button("Event Screen").button("Menu Screen");
 
-		addButtonsToPanel(buttons, panel);
+		JPanel panel = new JPanel(new GridLayout(
+				buttonManager.getButtons().size, 1));
+
+		addButtonsToPanel(buttonManager.getButtons(), panel);
 
 		container.add(panel, BorderLayout.WEST);
 
@@ -55,30 +55,6 @@ public class Main extends JFrame {
 		});
 	}
 
-	private void createNewButton() {
-		createNewButton("");
-	}
-
-	private void createNewButton(String text) {
-		addButtonToArray(new JButton(text));
-	}
-
-	private void addButtonToArray(JButton button) {
-		if (buttons != null) {
-			buttons.add(button);
-		}
-	}
-
-	private void removeButtonFromArray() {
-		for (int i = 0; i < buttons.size; i++) {
-			removeButtonFromArray(i);
-		}
-	}
-
-	private void removeButtonFromArray(int index) {
-		buttons.removeIndex(index);
-	}
-
 	private void addButtonsToPanel(Array<JButton> buttons, JPanel panel) {
 		JButton button;
 		for (int i = 0; i < buttons.size; i++) {
@@ -88,4 +64,5 @@ public class Main extends JFrame {
 			}
 		}
 	}
+
 }
