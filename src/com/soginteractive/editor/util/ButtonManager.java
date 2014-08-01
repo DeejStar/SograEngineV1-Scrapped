@@ -26,4 +26,8 @@ public class ButtonManager implements Manager {
 		return path;
 	}
 
+	public Array<JButton> getButtons() {
+		return buttons;
+	}
+
 }
