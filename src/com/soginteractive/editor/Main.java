@@ -42,7 +42,7 @@ public class Main extends JFrame {
 
 		pack();
 		setVisible(true);
-		setSize(800, 600);
+		setSize(1280, 720);
 
 	}
 

@@ -1,20 +1,22 @@
 package com.soginteractive.editor.screens;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.soginteractive.engine.core.AbstractScreen;
 import com.soginteractive.engine.menu.entities.Background;
 
 public class MainScreen extends AbstractScreen {
-	private Background background, background2;
 
 	public static boolean EDITOR_DEV_MODE = false;
+
+	private Background logo;
 
 	public MainScreen(Game game, float width, float height,
 			boolean keepAspectRatio, Batch batch) {
 		super(game, width, height, keepAspectRatio, batch);
+
+		logo = (Background) new Background("Logo").texture(
+				"images/logo.png").size(width, height).position(0, 0);
 	}
 
 	@Override
@@ -28,7 +30,7 @@ public class MainScreen extends AbstractScreen {
 
 		batch.begin();
 		{
-
+			logo.getSprite().draw(batch);
 		}
 		batch.end();
 	}
@@ -57,18 +59,10 @@ public class MainScreen extends AbstractScreen {
 	@Override
 	public void dispose() {
 		stage.dispose();
-		background.getTexture().dispose();
-		background2.getTexture().dispose();
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if (keycode == Keys.D) {
-			background.x(background.getPosition().x
-					+ Gdx.graphics.getDeltaTime() * 100);
-			System.out.println(background.getPosition().x);
-			return true;
-		}
 		return false;
 	}
 
@@ -95,16 +89,6 @@ public class MainScreen extends AbstractScreen {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if (screenX >= background2.getPosition().x
-				&& screenX <= (background2.getPosition().x + background2
-						.getSize().x)
-				&& screenY >= (stage.getHeight() - background2.getPosition().y - background2
-						.getSize().y)
-				&& screenY <= (stage.getHeight() - background2.getPosition().y)) {
-			System.out.println("Clicked at " + screenX + ":" + screenY);
-			background2.x(screenX).y(stage.getHeight() - screenY);
-			return true;
-		}
 		return false;
 	}
 
