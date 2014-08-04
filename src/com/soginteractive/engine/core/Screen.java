@@ -7,5 +7,5 @@ public interface Screen extends com.badlogic.gdx.Screen {
 	Screen multiplexer(InputMultiplexer multiplexer);
 	
 	InputMultiplexer getInputMultiplexer();
-	
+
 }

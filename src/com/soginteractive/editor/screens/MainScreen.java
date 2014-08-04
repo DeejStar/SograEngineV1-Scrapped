@@ -15,18 +15,12 @@ public class MainScreen extends AbstractScreen {
 	public MainScreen(Game game, float width, float height,
 			boolean keepAspectRatio, Batch batch) {
 		super(game, width, height, keepAspectRatio, batch);
-
-		background = (Background) new Background("Button1")
-				.texture("images/button1.png").size(100, 100)
-				.position(100, 100);
-
-		background2 = (Background) new Background("Button2")
-				.texture("images/button2.png").size(100, 100)
-				.position(200, 200);
 	}
 
 	@Override
 	public void render(float delta) {
+		super.render(delta);
+
 		addProcessor();
 
 		stage.act(delta);
@@ -34,8 +28,7 @@ public class MainScreen extends AbstractScreen {
 
 		batch.begin();
 		{
-			background.getSprite().draw(batch);
-			background2.getSprite().draw(batch);
+
 		}
 		batch.end();
 	}
