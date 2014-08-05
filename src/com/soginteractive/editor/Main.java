@@ -10,9 +10,16 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
+import com.badlogic.gdx.utils.Array;
+import com.soginteractive.editor.managers.JMenuItemManager;
+import com.soginteractive.editor.managers.JMenuManager;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
+
+	private JMenuManager menuManager, subMenuManager;
+	private JMenuItemManager menu1ItemManager, menu2ItemManager,
+			menu3ItemManager, menu3SubMenuItemManager;
 
 	public Main() {
 
@@ -25,9 +32,17 @@ public class Main extends JFrame {
 
 		JMenuBar menuBar = new JMenuBar();
 
+		menuManager = new JMenuManager("Menus");
+		subMenuManager = new JMenuManager("SubMenus");
+
 		JMenu menu = new JMenu("File");
 		JMenu menu2 = new JMenu("Edit");
 		JMenu menu3 = new JMenu("Window");
+
+		menu1ItemManager = new JMenuItemManager("FileMenuItems");
+		menu2ItemManager = new JMenuItemManager("EditMenuItems");
+		menu3ItemManager = new JMenuItemManager("WindowMenuItems");
+		menu3SubMenuItemManager = new JMenuItemManager("EditorsMenuItems");
 
 		JMenuItem menuItem1 = new JMenuItem("New Project");
 		JMenuItem menuItem2 = new JMenuItem("Open Project");
@@ -49,29 +64,42 @@ public class Main extends JFrame {
 		JMenuItem m3S1Item5 = new JMenuItem("Item");
 		JMenuItem m3S1Item6 = new JMenuItem("Event");
 
-		menu.add(menuItem1);
-		menu.add(menuItem2);
-		menu.add(menuItem3);
-		menu.add(menuItem4);
+		menu1ItemManager.menuItem(menuItem1).menuItem(menuItem2)
+				.menuItem(menuItem3).menuItem(menuItem4);
 
-		menu2.add(menu2Item1);
-		menu2.add(menu2Item2);
-		menu2.add(menu2Item3);
+		menu2ItemManager.menuItem(menu2Item1).menuItem(menu2Item2)
+				.menuItem(menu2Item3);
 
-		menu3.add(menu3Item1);
+		menu3ItemManager.menuItem(menu3Item1);
 
-		menu3Submenu1.add(m3S1Item1);
-		menu3Submenu1.add(m3S1Item2);
-		menu3Submenu1.add(m3S1Item3);
-		menu3Submenu1.add(m3S1Item4);
-		menu3Submenu1.add(m3S1Item5);
-		menu3Submenu1.add(m3S1Item6);
+		menu3SubMenuItemManager.menuItem(m3S1Item1).menuItem(m3S1Item2)
+				.menuItem(m3S1Item3).menuItem(m3S1Item4).menuItem(m3S1Item5)
+				.menuItem(m3S1Item6);
 
-		menu3.add(menu3Submenu1);
+		subMenuManager.menu(menu3Submenu1);
 
-		menuBar.add(menu);
-		menuBar.add(menu2);
-		menuBar.add(menu3);
+		subMenuManager.menuItemManager(menu3SubMenuItemManager);
+
+		menuManager.menu(menu).menu(menu2).menu(menu3);
+
+		menuManager.subMenuManager(subMenuManager);
+
+		menuManager.menuItemManager(menu1ItemManager)
+				.menuItemManager(menu2ItemManager)
+				.menuItemManager(menu3ItemManager);
+
+		menuManager.attachMenuItemsToMenu(menu, menu1ItemManager);
+		menuManager.attachMenuItemsToMenu(menu2, menu2ItemManager);
+		menuManager.attachMenuItemsToMenu(menu3, menu3ItemManager);
+		menuManager.attachMenuItemsToMenu(menu3Submenu1,
+				menu3SubMenuItemManager);
+
+		menuManager.attachSubMenuMenusToMenu(menu3, subMenuManager);
+
+		Array<JMenu> menus = menuManager.getMenus();
+		for (int i = 0; i < menus.size; i++) {
+			menuBar.add(menus.get(i));
+		}
 
 		container.add(menuBar, BorderLayout.NORTH);
 
