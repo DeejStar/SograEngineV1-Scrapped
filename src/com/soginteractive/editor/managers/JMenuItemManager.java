@@ -1,5 +1,6 @@
 package com.soginteractive.editor.managers;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.badlogic.gdx.utils.Array;
@@ -18,6 +19,12 @@ public class JMenuItemManager extends AbstractManager {
 	public JMenuItemManager menuItem(JMenuItem menuItem) {
 		menuItems.add(menuItem);
 		return this;
+	}
+
+	protected void attachMenuItemsToMenu(JMenu menu) {
+		for (int i = 0; i < menuItems.size; i++) {
+			menu.add(menuItems.get(i));
+		}
 	}
 
 	public Array<JMenuItem> getMenuItems() {
