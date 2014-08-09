@@ -28,7 +28,7 @@ public class Main extends JFrame implements ActionListener, ItemListener {
 	private JMenuItem menu3Item1;
 	private JMenuItem m3S1Item1, m3S1Item2, m3S1Item3, m3S1Item4, m3S1Item5,
 			m3S1Item6;
-	private JMenuManager menuManager, subMenuManager;
+	private JMenuManager metaMenuManager, menuManager, subMenuManager;
 	private JMenuItemManager menu1ItemManager, menu2ItemManager,
 			menu3ItemManager, menu3SubMenuItemManager;
 
@@ -43,6 +43,7 @@ public class Main extends JFrame implements ActionListener, ItemListener {
 
 		menuBar = new JMenuBar();
 
+		metaMenuManager = new JMenuManager("MenuManagers");
 		menuManager = new JMenuManager("Menus");
 		subMenuManager = new JMenuManager("SubMenus");
 
@@ -113,6 +114,9 @@ public class Main extends JFrame implements ActionListener, ItemListener {
 		menuManager.attachActionListenerToMenuItems(this);
 		menuManager.attachItemListenerToMenuItems(this);
 
+		metaMenuManager.subMenuManager(menuManager).subMenuManager(
+				subMenuManager);
+
 		Array<JMenu> menus = menuManager.getMenus();
 		for (int i = 0; i < menus.size; i++) {
 			menuBar.add(menus.get(i));
@@ -142,6 +146,22 @@ public class Main extends JFrame implements ActionListener, ItemListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		JMenuItem source = (JMenuItem) e.getSource();
+
+		for (int i = 0; i < metaMenuManager.getSubMenuManagers().size; i++) {
+			JMenuManager menuManager = metaMenuManager.getSubMenuManagers()
+					.get(i);
+			for (int j = 0; j < menuManager.getMenuItemManagers().size; j++) {
+				JMenuItemManager menuItemManager = menuManager
+						.getMenuItemManagers().get(j);
+
+				if (menuItemManager.isMenuItemActionPerformed(source)) {
+					System.out.println("Item clicked: " + e.getActionCommand());
+				}
+
+			}
+
+		}
 
 	}
 

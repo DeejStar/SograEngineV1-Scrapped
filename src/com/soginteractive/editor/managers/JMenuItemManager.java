@@ -42,6 +42,15 @@ public class JMenuItemManager extends AbstractManager {
 		}
 	}
 
+	public boolean isMenuItemActionPerformed(JMenuItem menuItem) {
+		for (int i = 0; i < menuItems.size; i++) {
+			if (menuItem == menuItems.get(i)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public Array<JMenuItem> getMenuItems() {
 		return menuItems;
 	}
