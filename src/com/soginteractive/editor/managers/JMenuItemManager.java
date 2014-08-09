@@ -1,5 +1,8 @@
 package com.soginteractive.editor.managers;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -24,6 +27,18 @@ public class JMenuItemManager extends AbstractManager {
 	protected void attachMenuItemsToMenu(JMenu menu) {
 		for (int i = 0; i < menuItems.size; i++) {
 			menu.add(menuItems.get(i));
+		}
+	}
+
+	protected void attachActionListenerToMenuItems(ActionListener actionListener) {
+		for (int i = 0; i < menuItems.size; i++) {
+			menuItems.get(i).addActionListener(actionListener);
+		}
+	}
+
+	protected void attachItemListenerToMenuItems(ItemListener itemListener) {
+		for (int i = 0; i < menuItems.size; i++) {
+			menuItems.get(i).addItemListener(itemListener);
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.soginteractive.editor.managers;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+
 import javax.swing.JMenu;
 
 import com.badlogic.gdx.utils.Array;
@@ -43,6 +46,19 @@ public class JMenuManager extends AbstractManager {
 		Array<JMenu> menus = subMenuManager.getMenus();
 		for (int i = 0; i < menus.size; i++) {
 			menu.add(menus.get(i));
+		}
+	}
+
+	public void attachActionListenerToMenuItems(ActionListener actionListener) {
+		for (int i = 0; i < menuItemManagers.size; i++) {
+			menuItemManagers.get(i).attachActionListenerToMenuItems(
+					actionListener);
+		}
+	}
+
+	public void attachItemListenerToMenuItems(ItemListener itemListener) {
+		for (int i = 0; i < menuItemManagers.size; i++) {
+			menuItemManagers.get(i).attachItemListenerToMenuItems(itemListener);
 		}
 	}
 
