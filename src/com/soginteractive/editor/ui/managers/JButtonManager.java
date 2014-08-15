@@ -1,4 +1,4 @@
-package com.soginteractive.editor.managers;
+package com.soginteractive.editor.ui.managers;
 
 import javax.swing.JButton;
 

@@ -15,9 +15,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.soginteractive.editor.managers.JMenuItemManager;
-import com.soginteractive.editor.managers.JMenuManager;
 import com.soginteractive.editor.screens.MainScreen;
+import com.soginteractive.editor.ui.managers.JMenuItemManager;
+import com.soginteractive.editor.ui.managers.JMenuManager;
 
 public class EditorMain extends Game implements ActionListener, ItemListener {
 

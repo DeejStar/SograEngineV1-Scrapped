@@ -1,4 +1,4 @@
-package com.soginteractive.editor.managers;
+package com.soginteractive.editor.util.managers;
 
 import static com.soginteractive.engine.core.util.ScriptUtils.concatStrings;
 import static com.soginteractive.engine.core.util.ScriptUtils.writerInstance;
