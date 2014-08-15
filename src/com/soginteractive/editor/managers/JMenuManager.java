@@ -61,7 +61,7 @@ public class JMenuManager extends AbstractManager {
 			menuItemManagers.get(i).attachItemListenerToMenuItems(itemListener);
 		}
 	}
-	
+
 	public Array<JMenu> getMenus() {
 		return menus;
 	}
