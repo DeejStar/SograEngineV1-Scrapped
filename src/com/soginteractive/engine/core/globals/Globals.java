@@ -1,4 +1,4 @@
-package com.soginteractive.engine.globals;
+package com.soginteractive.engine.core.globals;
 
 public final class Globals {
 	

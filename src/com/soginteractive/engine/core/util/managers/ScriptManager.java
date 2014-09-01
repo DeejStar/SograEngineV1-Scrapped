@@ -1,8 +1,8 @@
 package com.soginteractive.engine.core.util.managers;
 
+import static com.soginteractive.engine.core.globals.Globals.DEV_MODE;
 import static com.soginteractive.engine.core.util.ScriptUtils.concatStrings;
 import static com.soginteractive.engine.core.util.ScriptUtils.readerInstance;
-import static com.soginteractive.engine.globals.Globals.DEV_MODE;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

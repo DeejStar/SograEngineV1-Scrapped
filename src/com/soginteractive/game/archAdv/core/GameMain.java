@@ -1,6 +1,6 @@
 package com.soginteractive.game.archAdv.core;
 
-import static com.soginteractive.engine.globals.Globals.DEV_MODE;
+import static com.soginteractive.engine.core.globals.Globals.DEV_MODE;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
