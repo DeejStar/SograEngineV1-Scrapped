@@ -2,7 +2,6 @@ package com.soginteractive.engine.core.util.managers;
 
 import static com.soginteractive.engine.core.globals.Globals.DEV_MODE;
 import static com.soginteractive.engine.core.util.ScriptUtils.concatStrings;
-import static com.soginteractive.engine.core.util.ScriptUtils.readerInstance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -35,7 +34,7 @@ public class ScriptManager extends AbstractManager {
 				menuManager.getPath()));
 		for (FileHandle handle : dirHandle.list()) {
 			if (!handle.isDirectory()) {
-				menuReaders.add(readerInstance(handle));
+				menuReaders.add(new ScriptReader(handle));
 			}
 		}
 	}

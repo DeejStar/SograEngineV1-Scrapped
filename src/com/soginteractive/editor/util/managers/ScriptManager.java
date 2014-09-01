@@ -1,7 +1,6 @@
 package com.soginteractive.editor.util.managers;
 
 import static com.soginteractive.engine.core.util.ScriptUtils.concatStrings;
-import static com.soginteractive.engine.core.util.ScriptUtils.writerInstance;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -48,7 +47,7 @@ public class ScriptManager extends AbstractManager {
 
 	private void addToMenuWriters(Menu menu) {
 		String menuPath = path.concat(menuManager.getPath());
-		menuWriters.add(writerInstance(concatStrings(menuPath, menu.getName(),
+		menuWriters.add(new ScriptWriter(concatStrings(menuPath, menu.getName(),
 				extension)));
 		addPathToMenu(menu, menuPath);
 	}
@@ -119,7 +118,7 @@ public class ScriptManager extends AbstractManager {
 
 	private void writeMenuCommands(Json json, ScriptWriter writer,
 			Command command, String commandPath) {
-		writerInstance(concatStrings(writer.getParentPath(), commandPath))
+		new ScriptWriter(concatStrings(writer.getParentPath(), commandPath))
 				.writeScriptFile(json, command);
 	}
 
@@ -148,13 +147,13 @@ public class ScriptManager extends AbstractManager {
 
 	private void addTextPathToMenu(Menu menu, Text text, String textPath) {
 		menu.textPath(text, textPath);
-		
+
 		System.out.println(menu.getTextPath(text));
 	}
 
 	private void writeMenuTexts(Json json, ScriptWriter writer, Text text,
 			String textPath) {
-		writerInstance(concatStrings(writer.getParentPath(), textPath))
+		new ScriptWriter(concatStrings(writer.getParentPath(), textPath))
 				.writeScriptFile(json, text);
 	}
 
@@ -175,7 +174,7 @@ public class ScriptManager extends AbstractManager {
 
 	private void writeMenuBackground(Json json, ScriptWriter writer, Menu menu,
 			String backgroundPath) {
-		writerInstance(concatStrings(writer.getParentPath(), backgroundPath))
+		new ScriptWriter(concatStrings(writer.getParentPath(), backgroundPath))
 				.writeScriptFile(json, menu.getBackground());
 	}
 

@@ -1,10 +1,8 @@
 package com.soginteractive.engine.core.util;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.soginteractive.editor.util.ScriptWriter;
 
 public final class ScriptUtils {
 
@@ -49,14 +47,6 @@ public final class ScriptUtils {
 
 	public static void printBoolean(String name, boolean value) {
 		System.out.println(name.concat(DIV).concat(Boolean.toString(value)));
-	}
-
-	public static ScriptWriter writerInstance(String path) {
-		return new ScriptWriter(path);
-	}
-
-	public static ScriptReader readerInstance(FileHandle handle) {
-		return new ScriptReader(handle);
 	}
 
 }
