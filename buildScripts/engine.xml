@@ -19,6 +19,11 @@
 	<property name="misc-module" location="${build}/misc" />
 	<property name="dist" location="dist/engine" />
 
+	<path id="gdx">
+		<pathelement location="libs/" />
+		<pathelement path="gdx.jar" />
+	</path>
+
 	<target name="init">
 		<!-- Create the time stamp -->
 		<tstamp />
@@ -26,6 +31,7 @@
 		<mkdir dir="${build}" />
 		<mkdir dir="${battle-module}" />
 		<mkdir dir="${core-module}" />
+		<mkdir dir="${core-module}/util" />
 		<mkdir dir="${field-module}" />
 		<mkdir dir="${menu-module}" />
 		<mkdir dir="${misc-module}" />
@@ -35,30 +41,40 @@
 
 	</target>
 
-	<target name="compile-core" depends="compile"
+	<target name="compile-core" depends="init"
 		description="start compiling the core module">
 		<!-- Compile the java code from ${coreDir} into ${core-module} -->
-		<javac srcdir="${coreDir}" destdir="${core-module}" />
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" excludes="util/managers/*.java,*Screen*.java" />
 	</target>
 
-	<target name="compile-battle" depends="compile" description="compile battle module">
+	<target name="compile-battle" depends="compile-core-util"
+		description="compile battle module">
 		<!-- Compile the java code from ${battleDir} into ${battle-module} -->
-		<javac srcdir="${battleDir}" destdir="${battle-module}" />
+		<javac srcdir="${battleDir}" destdir="${battle-module}"
+			classpathref="gdx" excludes="screens/**/*.java" />
 	</target>
 
-	<target name="compile-field" depends="compile" description="compile field module">
+	<target name="compile-field" depends="init" description="compile field module">
 		<!-- Compile the java code from ${fieldDir} into ${field-module} -->
 		<javac srcdir="${fieldDir}" destdir="${field-module}" />
 	</target>
 
-	<target name="compile-menu" depends="compile" description="compile menu module">
+	<target name="compile-menu" depends="init" description="compile menu module">
 		<!-- Compile the java code from ${menuDir} into ${menu-module} -->
 		<javac srcdir="${menuDir}" destdir="${core-module}" />
 	</target>
 
-	<target name="compile-misc" depends="compile" description="compile misc module">
+	<target name="compile-misc" depends="init" description="compile misc module">
 		<!-- Compile the java code from ${miscDir} into ${misc-module} -->
 		<javac srcdir="${miscDir}" destdir="${misc-module}" />
+	</target>
+
+	<target name="compile-core-util" depends="init"
+		description="compile core util module">
+		<!-- Compile the java code from ${coreDir}/util into ${core-module}/util -->
+		<javac srcdir="${coreDir}/util" destdir="${core-module}/util"
+			classpathref="gdx" excludes="managers/*.java" />
 	</target>
 
 	<target name="dist-core" depends="compile-core" description="generate core distribution">
