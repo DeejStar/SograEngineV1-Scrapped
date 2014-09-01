@@ -15,8 +15,8 @@ public class MainScreen extends AbstractScreen {
 			boolean keepAspectRatio, Batch batch) {
 		super(game, width, height, keepAspectRatio, batch);
 
-		logo = (Background) new Background("Logo").texture(
-				"images/logo.png").size(width, height).position(0, 0);
+		logo = (Background) new Background("Logo").stage(stage).stretch(true)
+				.texture("images/logo.png");
 	}
 
 	@Override
