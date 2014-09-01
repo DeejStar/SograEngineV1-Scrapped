@@ -15,4 +15,6 @@ war/WEB-INF/lib/
 .classpath
 .project
 .settings/
+.build
+.dist
 res/

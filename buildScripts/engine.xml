@@ -1,0 +1,95 @@
+<project name="Engine" default="dist" basedir="..">
+	<description>
+		The main ant build file for the Engine modules.
+	</description>
+
+	<!-- set global properties -->
+	<property name="src" location="src" />
+	<property name="mainDir" location="${src}/com/soginteractive/engine" />
+	<property name="battleDir" location="${mainDir}/battle" />
+	<property name="coreDir" location="${mainDir}/core" />
+	<property name="fieldDir" location="${mainDir}/field" />
+	<property name="menuDir" location="${mainDir}/menu" />
+	<property name="miscDir" location="${mainDir}/misc" />
+	<property name="build" location="build" />
+	<property name="battle-module" location="${build}/battle" />
+	<property name="core-module" location="${build}/core" />
+	<property name="field-module" location="${build}/field" />
+	<property name="menu-module" location="${build}/menu" />
+	<property name="misc-module" location="${build}/misc" />
+	<property name="dist" location="dist/engine" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${battle-module}" />
+		<mkdir dir="${core-module}" />
+		<mkdir dir="${field-module}" />
+		<mkdir dir="${menu-module}" />
+		<mkdir dir="${misc-module}" />
+
+		<!-- Create the distribution directories -->
+		<mkdir dir="${dist}" />
+
+	</target>
+
+	<target name="compile-core" depends="compile"
+		description="start compiling the core module">
+		<!-- Compile the java code from ${coreDir} into ${core-module} -->
+		<javac srcdir="${coreDir}" destdir="${core-module}" />
+	</target>
+
+	<target name="compile-battle" depends="compile" description="compile battle module">
+		<!-- Compile the java code from ${battleDir} into ${battle-module} -->
+		<javac srcdir="${battleDir}" destdir="${battle-module}" />
+	</target>
+
+	<target name="compile-field" depends="compile" description="compile field module">
+		<!-- Compile the java code from ${fieldDir} into ${field-module} -->
+		<javac srcdir="${fieldDir}" destdir="${field-module}" />
+	</target>
+
+	<target name="compile-menu" depends="compile" description="compile menu module">
+		<!-- Compile the java code from ${menuDir} into ${menu-module} -->
+		<javac srcdir="${menuDir}" destdir="${core-module}" />
+	</target>
+
+	<target name="compile-misc" depends="compile" description="compile misc module">
+		<!-- Compile the java code from ${miscDir} into ${misc-module} -->
+		<javac srcdir="${miscDir}" destdir="${misc-module}" />
+	</target>
+
+	<target name="dist-core" depends="compile-core" description="generate core distribution">
+		<!-- Put everything in ${core-module} into the core.jar file -->
+		<jar jarfile="${dist}/core.jar" basedir="${core-module}" />
+	</target>
+
+	<target name="dist-battle" depends="compile-battle"
+		description="generate battle distribution">
+		<!-- Put everything in ${battle-module} into the battle.jar file -->
+		<jar jarfile="${dist}/battle.jar" basedir="${battle-module}" />
+	</target>
+
+	<target name="dist-field" depends="compile-field" description="generate field distribution">
+		<!-- Put everything in ${field-module} into the field.jar file -->
+		<jar jarfile="${dist}/field.jar" basedir="${field-module}" />
+	</target>
+
+	<target name="dist-menu" depends="compile-menu" description="generate menu distribution">
+		<!-- Put everything in ${menu-module} into the menu.jar file -->
+		<jar jarfile="${dist}/menu.jar" basedir="${menu-module}" />
+	</target>
+
+	<target name="dist-misc" depends="compile-misc" description="generate misc distribution">
+		<!-- Put everything in ${misc-module} into the misc.jar file -->
+		<jar jarfile="${dist}/misc.jar" basedir="${misc-module}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete ${build} and ${dist} folders -->
+		<delete dir="${build}" />
+		<delete dir="${build}" />
+	</target>
+</project>
