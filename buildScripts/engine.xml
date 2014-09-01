@@ -90,6 +90,6 @@
 	<target name="clean" description="clean up">
 		<!-- Delete ${build} and ${dist} folders -->
 		<delete dir="${build}" />
-		<delete dir="${build}" />
+		<delete dir="dist" />
 	</target>
 </project>
