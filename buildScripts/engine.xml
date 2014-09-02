@@ -22,6 +22,7 @@
 	<path id="gdx">
 		<pathelement path="${classpath}" />
 		<pathelement location="libs/gdx.jar" />
+		<pathelement location="$dist/*.jar" />
 		<pathelement location="${core-module}" />
 		<pathelement location="${battle-module}" />
 		<pathelement location="${field-module}" />
@@ -49,7 +50,7 @@
 		description="start compiling the core module">
 		<!-- Compile the java code from ${coreDir} into ${core-module} -->
 		<javac srcdir="${coreDir}" destdir="${core-module}"
-			classpathref="gdx" excludes="util/managers/*.java,*Screen*.java" />
+			classpathref="gdx" excludes="util/**/*.java" />
 	</target>
 
 	<target name="compile-battle" depends="compile-core-util,compile-battle-misc"
@@ -61,7 +62,8 @@
 
 	<target name="compile-field" depends="init" description="compile field module">
 		<!-- Compile the java code from ${fieldDir} into ${field-module} -->
-		<javac srcdir="${fieldDir}" destdir="${field-module}" />
+		<javac srcdir="${fieldDir}" destdir="${field-module}"
+			classpathref="gdx" />
 	</target>
 
 	<target name="compile-menu" depends="init" description="compile menu module">
@@ -69,9 +71,11 @@
 		<javac srcdir="${menuDir}" destdir="${core-module}" />
 	</target>
 
-	<target name="compile-misc" depends="init" description="compile misc module">
+	<target name="compile-misc" depends="compile-field-misc-event"
+		description="compile misc module">
 		<!-- Compile the java code from ${miscDir} into ${misc-module} -->
-		<javac srcdir="${miscDir}" destdir="${misc-module}" />
+		<javac srcdir="${miscDir}" destdir="${misc-module}"
+			classpathref="gdx" />
 	</target>
 
 	<target name="compile-core-util" depends="compile-core-script"
@@ -88,6 +92,13 @@
 			classpathref="gdx" includes="*Scripter*.java" />
 	</target>
 
+	<target name="compile-field-misc-event" depends="init"
+		description="compile field event code">
+		<!-- Compile the field event java code -->
+		<javac srcdir="${fieldDir}" destdir="${core-module}"
+			classpathref="gdx" includes="misc/Event.java" />
+	</target>
+
 	<target name="compile-battle-misc" depends="compile-core-script"
 		description="compile misc battle code">
 		<!-- Compile the java code from ${coreDir}/util into ${core-module}/util -->
@@ -95,7 +106,8 @@
 			classpathref="gdx" includes="misc/*.java" />
 	</target>
 
-	<target name="dist-core" depends="compile-core" description="generate core distribution">
+	<target name="dist-core" depends="dist-battle,dist-misc,compile-core"
+		description="generate core distribution">
 		<!-- Put everything in ${core-module} into the core.jar file -->
 		<jar jarfile="${dist}/core.jar" basedir="${core-module}" />
 	</target>
