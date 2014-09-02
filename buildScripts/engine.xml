@@ -50,7 +50,7 @@
 		description="start compiling the core module">
 		<!-- Compile the java code from ${coreDir} into ${core-module} -->
 		<javac srcdir="${coreDir}" destdir="${core-module}"
-			classpathref="gdx" excludes="util/**/*.java" />
+			classpathref="gdx" />
 	</target>
 
 	<target name="compile-battle" depends="compile-core-util,compile-battle-misc"
@@ -66,9 +66,11 @@
 			classpathref="gdx" />
 	</target>
 
-	<target name="compile-menu" depends="init" description="compile menu module">
+	<target name="compile-menu" depends="compile-core-screen,compile-menu-entities"
+		description="compile menu module">
 		<!-- Compile the java code from ${menuDir} into ${menu-module} -->
-		<javac srcdir="${menuDir}" destdir="${core-module}" />
+		<javac srcdir="${menuDir}" destdir="${menu-module}"
+			classpathref="gdx" />
 	</target>
 
 	<target name="compile-misc" depends="compile-field-misc-event"
@@ -92,10 +94,31 @@
 			classpathref="gdx" includes="*Scripter*.java" />
 	</target>
 
+	<target name="compile-core-screen" depends="init"
+		description="compile core screen code">
+		<!-- Compile the core scripter java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Screen*.java" />
+	</target>
+
+	<target name="compile-core-entities" depends="init"
+		description="compile core entity code">
+		<!-- Compile the core entity java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Entity*.java,entities/**/*.java" />
+	</target>
+
+	<target name="compile-core-manager" depends="init"
+		description="compile core manager code">
+		<!-- Compile the core manager java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Manager*.java" />
+	</target>
+
 	<target name="compile-field-misc-event" depends="init"
 		description="compile field event code">
 		<!-- Compile the field event java code -->
-		<javac srcdir="${fieldDir}" destdir="${core-module}"
+		<javac srcdir="${fieldDir}" destdir="${field-module}"
 			classpathref="gdx" includes="misc/Event.java" />
 	</target>
 
@@ -106,7 +129,14 @@
 			classpathref="gdx" includes="misc/*.java" />
 	</target>
 
-	<target name="dist-core" depends="dist-battle,dist-misc,compile-core"
+	<target name="compile-menu-entities" depends="compile-core-entities,compile-core-manager"
+		description="compile menu entities code">
+		<!-- Compile the java code from ${menuDir}/entities into ${menu-module}/entities -->
+		<javac srcdir="${menuDir}" destdir="${menu-module}"
+			classpathref="gdx" includes="entities/*.java,entities/managers/*.java" />
+	</target>
+
+	<target name="dist-core" depends="dist-battle,dist-misc,dist-menu,compile-core"
 		description="generate core distribution">
 		<!-- Put everything in ${core-module} into the core.jar file -->
 		<jar jarfile="${dist}/core.jar" basedir="${core-module}" />
