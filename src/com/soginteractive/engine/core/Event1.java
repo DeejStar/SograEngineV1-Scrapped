@@ -1,4 +1,4 @@
-package com.soginteractive.engine.field.misc;
+package com.soginteractive.engine.core;
 
 import static com.soginteractive.engine.core.util.ScriptUtils.*;
 
@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 
-public class Event implements Serializable {
+public class Event1 implements Serializable {
 
 	private String name, description;
 	private boolean complete;
@@ -15,25 +15,25 @@ public class Event implements Serializable {
 	private final String NAME = "name";
 	private final String DESC = "description";
 
-	public Event() {
+	public Event1() {
 		this("", "");
 	}
 
-	public Event(String name, String description) {
+	public Event1(String name, String description) {
 		name(name).description(description);
 	}
 
-	public Event name(String name) {
+	public Event1 name(String name) {
 		this.name = name;
 		return this;
 	}
 
-	public Event description(String description) {
+	public Event1 description(String description) {
 		this.description = description;
 		return this;
 	}
 
-	public Event complete(boolean complete) {
+	public Event1 complete(boolean complete) {
 		this.complete = complete;
 		return this;
 	}
