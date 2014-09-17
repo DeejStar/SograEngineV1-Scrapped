@@ -1,0 +1,88 @@
+<project name="battle" default="dist" basedir="../..">
+	<description>
+		The battle module ant build file.
+	</description>
+
+	<!-- set global properties -->
+	<property name="src" location="src" />
+	<property name="mainDir" location="${src}/com/soginteractive/engine" />
+	<property name="battleDir" location="${mainDir}/battle" />
+	<property name="coreDir" location="${mainDir}/core" />
+	<property name="fieldDir" location="${mainDir}/field" />
+	<property name="menuDir" location="${mainDir}/menu" />
+	<property name="miscDir" location="${mainDir}/misc" />
+	<property name="build" location="build" />
+	<property name="battle-module" location="${build}/battle" />
+	<property name="core-module" location="${build}/core" />
+	<property name="field-module" location="${build}/field" />
+	<property name="menu-module" location="${build}/menu" />
+	<property name="misc-module" location="${build}/misc" />
+	<property name="dist" location="dist/engine" />
+
+	<path id="gdx">
+		<pathelement path="${classpath}" />
+		<pathelement location="libs/gdx.jar" />
+		<pathelement location="$dist/*.jar" />
+		<pathelement location="${core-module}" />
+		<pathelement location="${battle-module}" />
+		<pathelement location="${field-module}" />
+		<pathelement location="${menu-module}" />
+		<pathelement location="${misc-module}" />
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${battle-module}" />
+		<mkdir dir="${core-module}" />
+		<mkdir dir="${field-module}" />
+		<mkdir dir="${menu-module}" />
+		<mkdir dir="${misc-module}" />
+
+		<!-- Create the distribution directories -->
+		<mkdir dir="${dist}" />
+
+	</target>
+
+	<target name="compile" depends="compile-core-util,compile-battle-misc"
+		description="compile battle module">
+		<!-- Compile the java code from ${battleDir} into ${battle-module} -->
+		<javac srcdir="${battleDir}" destdir="${battle-module}"
+			classpathref="gdx" excludes="screens/**/*.java" />
+	</target>
+
+	<target name="compile-core-util" depends="compile-core-script"
+		description="compile core util module">
+		<!-- Compile the java code from ${coreDir}/util into ${core-module}/util -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="util/**/*.java" excludes="util/managers/*.java" />
+	</target>
+
+	<target name="compile-battle-misc" depends="compile-core-script"
+		description="compile misc battle code">
+		<!-- Compile the java code from ${coreDir}/util into ${core-module}/util -->
+		<javac srcdir="${battleDir}" destdir="${battle-module}"
+			classpathref="gdx" includes="misc/*.java" />
+	</target>
+
+	<target name="compile-core-script" depends="init"
+		description="compile core scripter">
+		<!-- Compile the core scripter java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Scripter*.java" />
+	</target>
+
+	<target name="dist" depends="compile" description="generate battle distribution">
+		<!-- Put everything in ${battle-module} into the battle.jar file -->
+		<jar jarfile="${dist}/battle.jar" basedir="${battle-module}" />
+	</target>
+	
+	<target name="clean" description="clean up">
+		<!-- Delete ${build} and ${dist} folders -->
+		<delete dir="${build}" />
+		<delete dir="dist" />
+	</target>
+
+</project>

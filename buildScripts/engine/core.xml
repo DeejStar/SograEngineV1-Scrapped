@@ -1,0 +1,66 @@
+<project name="core" default="dist" basedir="..">
+	<description>
+		The core module ant build file.
+	</description>
+
+	<!-- set global properties -->
+	<property name="src" location="src" />
+	<property name="mainDir" location="${src}/com/soginteractive/engine" />
+	<property name="battleDir" location="${mainDir}/battle" />
+	<property name="coreDir" location="${mainDir}/core" />
+	<property name="fieldDir" location="${mainDir}/field" />
+	<property name="menuDir" location="${mainDir}/menu" />
+	<property name="miscDir" location="${mainDir}/misc" />
+	<property name="build" location="build" />
+	<property name="battle-module" location="${build}/battle" />
+	<property name="core-module" location="${build}/core" />
+	<property name="field-module" location="${build}/field" />
+	<property name="menu-module" location="${build}/menu" />
+	<property name="misc-module" location="${build}/misc" />
+	<property name="dist" location="dist/engine" />
+
+	<path id="gdx">
+		<pathelement path="${classpath}" />
+		<pathelement location="libs/gdx.jar" />
+		<pathelement location="$dist/*.jar" />
+		<pathelement location="${core-module}" />
+		<pathelement location="${battle-module}" />
+		<pathelement location="${field-module}" />
+		<pathelement location="${menu-module}" />
+		<pathelement location="${misc-module}" />
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${battle-module}" />
+		<mkdir dir="${core-module}" />
+		<mkdir dir="${field-module}" />
+		<mkdir dir="${menu-module}" />
+		<mkdir dir="${misc-module}" />
+
+		<!-- Create the distribution directories -->
+		<mkdir dir="${dist}" />
+
+	</target>
+
+	<target name="compile" depends="init" description="start compiling the core module">
+		<!-- Compile the java code from ${coreDir} into ${core-module} -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" />
+	</target>
+
+	<target name="dist" depends="compile" description="generate core distribution">
+		<!-- Put everything in ${core-module} into the core.jar file -->
+		<jar jarfile="${dist}/core.jar" basedir="${core-module}" />
+	</target>
+	
+	<target name="clean" description="clean up">
+		<!-- Delete ${build} and ${dist} folders -->
+		<delete dir="${build}" />
+		<delete dir="dist" />
+	</target>
+
+</project>

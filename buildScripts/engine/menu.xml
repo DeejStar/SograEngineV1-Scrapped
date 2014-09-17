@@ -1,0 +1,85 @@
+<project name="menu" default="dist" basedir="../..">
+	<description>
+		The menu module ant build file.
+	</description>
+
+	<!-- set global properties -->
+	<property name="src" location="src" />
+	<property name="mainDir" location="${src}/com/soginteractive/engine" />
+	<property name="coreDir" location="${mainDir}/core" />
+	<property name="menuDir" location="${mainDir}/menu" />
+	<property name="miscDir" location="${mainDir}/misc" />
+	<property name="build" location="build" />
+	<property name="core-module" location="${build}/core" />
+	<property name="menu-module" location="${build}/menu" />
+	<property name="misc-module" location="${build}/misc" />
+	<property name="dist" location="dist/engine" />
+
+	<path id="gdx">
+		<pathelement path="${classpath}" />
+		<pathelement location="libs/gdx.jar" />
+		<pathelement location="${dist}/battle.jar" />
+		<pathelement location="${dist}/misc.jar" />
+		<pathelement location="${core-module}" />
+		<!-- <pathelement location="${misc-module}" /> -->
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${core-module}" />
+		<mkdir dir="${menu-module}" />
+
+		<!-- Create the distribution directories -->
+		<mkdir dir="${dist}" />
+
+	</target>
+
+	<target name="compile" depends="compile-core-screen,compile-menu-entities"
+		description="compile menu module">
+		<!-- Compile the java code from ${menuDir} into ${menu-module} -->
+		<javac srcdir="${menuDir}" destdir="${menu-module}"
+			classpathref="gdx" />
+	</target>
+
+	<target name="compile-core-screen" depends="init"
+		description="compile core screen code">
+		<!-- Compile the core scripter java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Screen*.java" />
+	</target>
+
+	<target name="compile-menu-entities" depends="compile-core-entities,compile-core-manager"
+		description="compile menu entities code">
+		<!-- Compile the java code from ${menuDir}/entities into ${menu-module}/entities -->
+		<javac srcdir="${menuDir}" destdir="${menu-module}"
+			classpathref="gdx" includes="entities/*.java,entities/managers/*.java" />
+	</target>
+
+	<target name="compile-core-entities" depends="init"
+		description="compile core entity code">
+		<!-- Compile the core entity java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Entity*.java,entities/**/*.java" />
+	</target>
+
+	<target name="compile-core-manager" depends="init"
+		description="compile core manager code">
+		<!-- Compile the core manager java code -->
+		<javac srcdir="${coreDir}" destdir="${core-module}"
+			classpathref="gdx" includes="*Manager*.java" />
+	</target>
+
+	<target name="dist" depends="compile" description="generate menu distribution">
+		<!-- Put everything in ${menu-module} into the menu.jar file -->
+		<jar jarfile="${dist}/menu.jar" basedir="${menu-module}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete ${build} and ${dist} folders -->
+		<delete dir="${build}" />
+		<delete dir="dist" />
+	</target>
+</project>

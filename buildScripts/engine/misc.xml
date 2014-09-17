@@ -1,0 +1,65 @@
+<project name="misc" default="dist" basedir="../..">
+	<description>
+		The misc module ant build file.
+	</description>
+
+	<!-- set global properties -->
+	<property name="src" location="src" />
+	<property name="mainDir" location="${src}/com/soginteractive/engine" />
+	<property name="coreDir" location="${mainDir}/core" />
+	<property name="fieldDir" location="${mainDir}/field" />
+	<property name="miscDir" location="${mainDir}/misc" />
+	<property name="build" location="build" />
+	<property name="core-module" location="${build}/core" />
+	<property name="field-module" location="${build}/field" />
+	<property name="misc-module" location="${build}/misc" />
+	<property name="dist" location="dist/engine" />
+
+	<path id="gdx">
+		<pathelement path="${classpath}" />
+		<pathelement location="libs/gdx.jar" />
+		<pathelement location="$dist/battle.jar" />
+		<pathelement location="${core-module}" />
+		<pathelement location="${field-module}" />
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${core-module}" />
+		<mkdir dir="${field-module}" />
+		<mkdir dir="${misc-module}" />
+
+		<!-- Create the distribution directories -->
+		<mkdir dir="${dist}" />
+
+	</target>
+
+	<target name="compile" depends="compile-field-misc-event"
+		description="compile misc module">
+		<!-- Compile the java code from ${miscDir} into ${misc-module} -->
+		<javac srcdir="${miscDir}" destdir="${misc-module}"
+			classpathref="gdx" />
+	</target>
+
+	<target name="compile-field-misc-event" depends="init"
+		description="compile field event code">
+		<!-- Compile the field event java code -->
+		<javac srcdir="${fieldDir}" destdir="${field-module}"
+			classpathref="gdx" includes="misc/Event.java" />
+	</target>
+
+	<target name="dist" depends="compile"
+		description="generate misc distribution">
+		<!-- Put everything in ${misc-module} into the misc.jar file -->
+		<jar jarfile="${dist}/misc.jar" basedir="${misc-module}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete ${build} and ${dist} folders -->
+		<delete dir="${build}" />
+		<delete dir="dist" />
+	</target>
+</project>
