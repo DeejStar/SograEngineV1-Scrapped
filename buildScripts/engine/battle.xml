@@ -46,7 +46,7 @@
 
 	</target>
 
-	<target name="compile" depends="compile-core-util,compile-battle-misc"
+	<target name="compile" depends="compile-core-util,compile-core-misc"
 		description="compile battle module">
 		<!-- Compile the java code from ${battleDir} into ${battle-module} -->
 		<javac srcdir="${battleDir}" destdir="${battle-module}"
@@ -60,10 +60,10 @@
 			classpathref="gdx" includes="util/**/*.java" excludes="util/managers/*.java" />
 	</target>
 
-	<target name="compile-battle-misc" depends="compile-core-script"
-		description="compile misc battle code">
+	<target name="compile-core-misc" depends="compile-core-script"
+		description="compile misc core code">
 		<!-- Compile the java code from ${coreDir}/util into ${core-module}/util -->
-		<javac srcdir="${battleDir}" destdir="${battle-module}"
+		<javac srcdir="${coreDir}" destdir="${core-module}"
 			classpathref="gdx" includes="misc/*.java" />
 	</target>
 
