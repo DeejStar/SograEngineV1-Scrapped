@@ -6,6 +6,8 @@ import com.soginteractive.engine.core.AbstractEquipment;
 
 public class Accessory extends AbstractEquipment {
 
+	private final String OBJ = "Accessory";
+
 	public Accessory() {
 		this("");
 	}
@@ -16,7 +18,10 @@ public class Accessory extends AbstractEquipment {
 
 	@Override
 	public void write(Json json) {
-		super.write(json);
+		json.writeObjectStart(OBJ);
+		{
+			super.write(json);
+		}
 		json.writeObjectEnd();
 	}
 
@@ -24,7 +29,7 @@ public class Accessory extends AbstractEquipment {
 	public void read(Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
 	}
-	
+
 	@Override
 	public void printJson() {
 		super.printJson();

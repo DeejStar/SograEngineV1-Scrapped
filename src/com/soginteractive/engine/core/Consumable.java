@@ -10,7 +10,7 @@ public interface Consumable {
 
 	Consumable amount(int amount);
 
-	Consumable targets(String... targets);
+	Consumable target(String target);
 
 	Consumable usable(boolean usable);
 

@@ -90,14 +90,16 @@ public abstract class Image extends AbstractEntity {
 		return sprite;
 	}
 
-	protected void writeImageScripts(Json json) {
-		writeEntityScripts(json);
+	@Override
+	public void write(Json json) {
+		super.write(json);
 		json.writeValue(TXTP, texturePath);
 	}
 
-	protected void readImageScripts(Json json, JsonValue jsonData) {
+	@Override
+	public void read(Json json, JsonValue jsonData) {
 		JsonValue child = jsonData.child;
-		readEntityScripts(json, jsonData);
+		super.read(json, jsonData);
 		texture(child.getString(TXTP));
 	}
 

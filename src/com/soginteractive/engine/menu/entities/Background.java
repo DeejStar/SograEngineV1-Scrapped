@@ -7,12 +7,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soginteractive.engine.core.entities.Image;
 import com.soginteractive.engine.misc.Texture;
 
-public class Background extends Image implements Serializable {
+public class Background extends Image {
 
 	private boolean stretch;
 
@@ -93,7 +92,7 @@ public class Background extends Image implements Serializable {
 	public void write(Json json) {
 		json.writeObjectStart(OBJ);
 		{
-			writeImageScripts(json);
+			super.write(json);
 			json.writeValue(STRC, stretch);
 		}
 		json.writeObjectEnd();
@@ -102,7 +101,7 @@ public class Background extends Image implements Serializable {
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 		JsonValue child = jsonData.child;
-		readImageScripts(json, jsonData);
+		super.read(json, jsonData);
 		stretch(child.getBoolean(STRC));
 	}
 

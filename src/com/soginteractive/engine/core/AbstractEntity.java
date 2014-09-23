@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soginteractive.engine.misc.Texture;
 
-public abstract class AbstractEntity implements Entity {
+public abstract class AbstractEntity implements Entity, Serializable {
 
 	private String name, path;
 
@@ -118,7 +119,8 @@ public abstract class AbstractEntity implements Entity {
 		return new Rectangle(x, y, width, height);
 	}
 
-	protected void writeEntityScripts(Json json) {
+	@Override
+	public void write(Json json) {
 		json.writeValue(NAME, name);
 		json.writeValue(X, x);
 		json.writeValue(Y, y);
@@ -126,7 +128,8 @@ public abstract class AbstractEntity implements Entity {
 		json.writeValue(HGHT, height);
 	}
 
-	protected void readEntityScripts(Json json, JsonValue jsonData) {
+	@Override
+	public void read(Json json, JsonValue jsonData) {
 		JsonValue child = jsonData.child;
 
 		name(child.getString(NAME));

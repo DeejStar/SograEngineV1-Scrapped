@@ -14,6 +14,7 @@ public class Weapon extends AbstractEquipment {
 	private float hitChance;
 	private String range;
 
+	private final String OBJ = "Weapon";
 	private final String DMG = "damage";
 	private final String HITC = "hitChance";
 	private final String RNG = "range";
@@ -55,8 +56,9 @@ public class Weapon extends AbstractEquipment {
 
 	@Override
 	public void write(Json json) {
-		super.write(json);
+		json.writeObjectStart(OBJ);
 		{
+			super.write(json);
 			json.writeValue(DMG, damage);
 			json.writeValue(HITC, hitChance);
 			json.writeValue(RNG, range);

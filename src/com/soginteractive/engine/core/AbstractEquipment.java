@@ -7,9 +7,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
-import com.soginteractive.engine.core.equipment.Accessory;
-import com.soginteractive.engine.core.equipment.Armor;
-import com.soginteractive.engine.core.equipment.Weapon;
 import com.soginteractive.engine.core.misc.Effect;
 import com.soginteractive.engine.core.misc.Element;
 import com.soginteractive.engine.core.misc.Modifier;
@@ -70,31 +67,31 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 
 	@Override
 	public Equipment requirement(Requirement requirement) {
-		this.requirements.addAll(requirements);
+		requirements.add(requirement);
 		return this;
 	}
 
 	@Override
 	public Equipment modifier(Modifier modifier) {
-		this.modifiers.addAll(modifiers);
+		modifiers.add(modifier);
 		return this;
 	}
 
 	@Override
 	public Equipment restriction(Restriction restriction) {
-		this.restrictions.addAll(restrictions);
+		restrictions.add(restriction);
 		return this;
 	}
 
 	@Override
 	public Equipment element(Element element) {
-		this.elements.addAll(elements);
+		elements.add(element);
 		return this;
 	}
 
 	@Override
 	public Equipment effect(Effect effect) {
-		this.effects.addAll(effects);
+		effects.add(effect);
 		return this;
 	}
 
@@ -145,33 +142,17 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 
 	@Override
 	public void write(Json json) {
-		String object = "";
-		if (this instanceof Weapon) {
-			object = "Weapon";
-		}
-
-		if (this instanceof Armor) {
-			object = "Armor";
-		}
-
-		if (this instanceof Accessory) {
-			object = "Accessory";
-		}
-
-		json.writeObjectStart(object);
-		{
-			json.writeValue(NAME, name);
-			json.writeValue(DESC, description);
-			json.writeValue(TYPE, type);
-			json.writeValue(LOC, location);
-			json.writeValue(REQS, requirements);
-			json.writeValue(MODS, modifiers);
-			json.writeValue(RESTS, restrictions);
-			json.writeValue(ELMNS, elements);
-			json.writeValue(EFCTS, effects);
-		}
+		json.writeValue(NAME, name);
+		json.writeValue(DESC, description);
+		json.writeValue(TYPE, type);
+		json.writeValue(LOC, location);
+		json.writeValue(REQS, requirements);
+		json.writeValue(MODS, modifiers);
+		json.writeValue(RESTS, restrictions);
+		json.writeValue(ELMNS, elements);
+		json.writeValue(EFCTS, effects);
 	}
-	
+
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 		JsonValue child = jsonData.child;
@@ -187,31 +168,31 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 		createArrayFromJson(EFCTS, json, child, effects);
 
 	}
-	
+
 	@Override
 	public void printJson() {
 		printString(NAME, name);
 		printString(DESC, description);
 		printString(TYPE, type);
 		printString(LOC, location);
-		
-		for(Requirement requirement : requirements) {
+
+		for (Requirement requirement : requirements) {
 			requirement.printJson();
 		}
-		
-		for(Modifier modifier : modifiers) {
+
+		for (Modifier modifier : modifiers) {
 			modifier.printJson();
 		}
-		
-		for(Restriction restriction : restrictions) {
+
+		for (Restriction restriction : restrictions) {
 			restriction.printJson();
 		}
-		
-		for(Element element : elements) {
+
+		for (Element element : elements) {
 			element.printJson();
 		}
-		
-		for(Effect effect : effects) {
+
+		for (Effect effect : effects) {
 			effect.printJson();
 		}
 	}

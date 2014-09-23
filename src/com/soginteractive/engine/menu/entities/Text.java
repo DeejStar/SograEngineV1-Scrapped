@@ -12,12 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soginteractive.engine.core.AbstractEntity;
 import com.soginteractive.engine.misc.BitmapFont;
 
-public class Text extends AbstractEntity implements Serializable {
+public class Text extends AbstractEntity {
 
 	private String sequence;
 	private int wrapAlign, labelAlign, lineAlign;
@@ -202,7 +201,7 @@ public class Text extends AbstractEntity implements Serializable {
 	public void write(Json json) {
 		json.writeObjectStart(OBJ);
 		{
-			writeEntityScripts(json);
+			super.write(json);
 			json.writeValue(SEQ, sequence);
 			json.writeValue(WRPA, wrapAlign);
 			json.writeValue(LBLA, labelAlign);
@@ -218,7 +217,7 @@ public class Text extends AbstractEntity implements Serializable {
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 		JsonValue child = jsonData.child;
-		readEntityScripts(json, jsonData);
+		super.read(json, jsonData);
 		sequence(child.getString(SEQ));
 		wrapAlign(child.getInt(WRPA));
 		labelAlign(child.getInt(LBLA));

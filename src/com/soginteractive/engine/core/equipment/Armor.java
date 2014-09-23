@@ -12,6 +12,7 @@ public class Armor extends AbstractEquipment {
 	private int defense, magicDefense;
 	private float defenseRate, magicDefenseRate;
 
+	private final String OBJ = "Armor";
 	private final String DEF = "defense";
 	private final String MAGD = "magicDefense";
 	private final String DEFR = "defenseRate";
@@ -63,8 +64,9 @@ public class Armor extends AbstractEquipment {
 
 	@Override
 	public void write(Json json) {
-		super.write(json);
+		json.writeObjectStart(OBJ);
 		{
+			super.write(json);
 			json.writeValue(DEF, defense);
 			json.writeValue(MAGD, magicDefense);
 			json.writeValue(DEFR, defenseRate);
@@ -76,7 +78,7 @@ public class Armor extends AbstractEquipment {
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 		super.read(json, jsonData);
-		
+
 		JsonValue child = jsonData.child;
 		defense(child.getInt(DEF));
 		magicDefense(child.getInt(MAGD));
@@ -84,11 +86,10 @@ public class Armor extends AbstractEquipment {
 		magicDefenseRate(child.getFloat(MAGDR));
 	}
 
-	
 	@Override
 	public void printJson() {
 		super.printJson();
-		
+
 		printInt(DEF, defense);
 		printInt(MAGD, magicDefense);
 		printFloat(DEFR, defenseRate);
