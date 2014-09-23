@@ -1,8 +1,8 @@
 package com.soginteractive.engine.core.consumables;
 
 import com.badlogic.gdx.utils.Array;
-import com.soginteractive.engine.battle.misc.Restore;
 import com.soginteractive.engine.core.AbstractConsumable;
+import com.soginteractive.engine.core.misc.Restore;
 
 public class RestorativeItem extends AbstractConsumable {
 
@@ -13,8 +13,8 @@ public class RestorativeItem extends AbstractConsumable {
 		restores = new Array<Restore>();
 	}
 
-	public RestorativeItem restores(Restore... restores) {
-		this.restores.addAll(restores);
+	public RestorativeItem restores(Restore restore) {
+		restores.add(restore);
 		return this;
 	}
 

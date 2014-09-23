@@ -176,25 +176,31 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 		printString(TYPE, type);
 		printString(LOC, location);
 
-		for (Requirement requirement : requirements) {
+		for (int i = 0; i < requirements.size; i++) {
+			Requirement requirement = requirements.get(i);
 			requirement.printJson();
 		}
 
-		for (Modifier modifier : modifiers) {
+		for (int i = 0; i < modifiers.size; i++) {
+			Modifier modifier = modifiers.get(i);
 			modifier.printJson();
 		}
 
-		for (Restriction restriction : restrictions) {
+		for (int i = 0; i < restrictions.size; i++) {
+			Restriction restriction = restrictions.get(i);
 			restriction.printJson();
 		}
 
-		for (Element element : elements) {
+		for (int i = 0; i < elements.size; i++) {
+			Element element = elements.get(i);
 			element.printJson();
 		}
 
-		for (Effect effect : effects) {
+		for (int i = 0; i < effects.size; i++) {
+			Effect effect = effects.get(i);
 			effect.printJson();
 		}
+
 	}
 
 }

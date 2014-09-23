@@ -2,23 +2,23 @@ package com.soginteractive.engine.core.consumables;
 
 import com.badlogic.gdx.utils.Array;
 import com.soginteractive.engine.core.AbstractConsumable;
-import com.soginteractive.engine.core.Event1;
+import com.soginteractive.engine.core.Event;
 
 public class KeyItem extends AbstractConsumable {
 
-	private Array<Event1> events;
+	private Array<Event> events;
 
 	public KeyItem(String name) {
 		super(name);
-		events = new Array<Event1>();
+		events = new Array<Event>();
 	}
 
-	public KeyItem event(Event1 event) {
+	public KeyItem event(Event event) {
 		this.events.add(event);
 		return this;
 	}
 
-	public Array<Event1> getEvents() {
+	public Array<Event> getEvents() {
 		return events;
 	}
 

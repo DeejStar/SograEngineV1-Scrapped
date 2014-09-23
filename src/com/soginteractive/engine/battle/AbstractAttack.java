@@ -1,7 +1,7 @@
 package com.soginteractive.engine.battle;
 
 import com.badlogic.gdx.utils.Array;
-import com.soginteractive.engine.battle.misc.Cost;
+import com.soginteractive.engine.core.misc.Cost;
 
 public abstract class AbstractAttack implements Attack {
 

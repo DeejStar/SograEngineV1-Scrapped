@@ -1,8 +1,8 @@
 package com.soginteractive.engine.core.consumables;
 
 import com.badlogic.gdx.utils.Array;
-import com.soginteractive.engine.battle.misc.Destroy;
 import com.soginteractive.engine.core.AbstractConsumable;
+import com.soginteractive.engine.core.misc.Destroy;
 
 public class DestructiveItem extends AbstractConsumable {
 
@@ -20,8 +20,8 @@ public class DestructiveItem extends AbstractConsumable {
 		return this;
 	}
 
-	public DestructiveItem destroys(Destroy... destroys) {
-		this.destroys.addAll(destroys);
+	public DestructiveItem destroy(Destroy destroy) {
+		destroys.add(destroy);
 		return this;
 	}
 

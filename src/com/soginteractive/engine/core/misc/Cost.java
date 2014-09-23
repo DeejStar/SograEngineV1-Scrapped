@@ -1,4 +1,4 @@
-package com.soginteractive.engine.battle.misc;
+package com.soginteractive.engine.core.misc;
 
 import static com.soginteractive.engine.core.util.ScriptUtils.printInt;
 import static com.soginteractive.engine.core.util.ScriptUtils.printString;
