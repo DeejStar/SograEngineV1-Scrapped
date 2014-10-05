@@ -2,6 +2,7 @@ package com.soginteractive.engine.battle;
 
 import com.badlogic.gdx.utils.Array;
 import com.soginteractive.engine.core.misc.Cost;
+import com.soginteractive.engine.core.misc.Target;
 
 public interface Attack {
 
@@ -15,7 +16,7 @@ public interface Attack {
 
 	Attack hits(int hits);
 
-	Attack target(String target);
+	Attack target(Target target);
 
 	Attack cost(Cost cost);
 
@@ -29,7 +30,7 @@ public interface Attack {
 
 	int getHits();
 
-	Array<String> getTargets();
+	Array<Target> getTargets();
 
 	Array<Cost> getCosts();
 

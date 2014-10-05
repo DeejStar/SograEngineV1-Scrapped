@@ -9,13 +9,14 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Json.Serializable;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soginteractive.engine.core.misc.Cost;
+import com.soginteractive.engine.core.misc.Target;
 
 public abstract class AbstractAttack implements Attack, Serializable {
 
 	private String name, description, type;
 	private int baseDamage, hits;
 
-	private Array<String> targets;
+	private Array<Target> targets;
 	private Array<Cost> costs;
 
 	private final String NAME = "name";
@@ -28,7 +29,7 @@ public abstract class AbstractAttack implements Attack, Serializable {
 
 	protected AbstractAttack(String name) {
 		name(name);
-		targets = new Array<String>();
+		targets = new Array<Target>();
 		costs = new Array<Cost>();
 	}
 
@@ -63,7 +64,7 @@ public abstract class AbstractAttack implements Attack, Serializable {
 	}
 
 	@Override
-	public Attack target(String target) {
+	public Attack target(Target target) {
 		this.targets.add(target);
 		return this;
 	}
@@ -100,7 +101,7 @@ public abstract class AbstractAttack implements Attack, Serializable {
 	}
 
 	@Override
-	public Array<String> getTargets() {
+	public Array<Target> getTargets() {
 		return targets;
 	}
 
@@ -141,11 +142,11 @@ public abstract class AbstractAttack implements Attack, Serializable {
 		printInt(HITS, hits);
 
 		for (int i = 0; i < targets.size; i++) {
-			String target = targets.get(i);
-			System.out.println(target);
+			Target target = targets.get(i);
+			target.printJson();
 		}
-		
-		for(int i = 0; i < costs.size; i++) {
+
+		for (int i = 0; i < costs.size; i++) {
 			Cost cost = costs.get(i);
 			cost.printJson();
 		}
