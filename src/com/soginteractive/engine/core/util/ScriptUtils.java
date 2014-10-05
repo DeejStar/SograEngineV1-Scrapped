@@ -12,10 +12,18 @@ public final class ScriptUtils {
 
 	}
 
-	public static String concatStrings(String base, Array<String> strings) {
+	public static String concatStrings(String base, String... strings) {
 		String newString = base;
-		iterateThroughStringArray(strings, newString);
+		iterateThroughStringArray(convertStringArrayToArray(strings), newString);
 		return newString;
+	}
+
+	private static Array<String> convertStringArrayToArray(String... strings) {
+		Array<String> array = new Array<String>();
+		for (int i = 0; i < strings.length + 1; i++) {
+			array.set(i, strings[i]);
+		}
+		return array;
 	}
 
 	private static void iterateThroughStringArray(Array<String> strings,
