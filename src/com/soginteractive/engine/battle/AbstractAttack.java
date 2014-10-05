@@ -1,15 +1,30 @@
 package com.soginteractive.engine.battle;
 
+import static com.soginteractive.engine.core.util.ScriptUtils.createArrayFromJson;
+import static com.soginteractive.engine.core.util.ScriptUtils.printInt;
+import static com.soginteractive.engine.core.util.ScriptUtils.printString;
+
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Json.Serializable;
+import com.badlogic.gdx.utils.JsonValue;
 import com.soginteractive.engine.core.misc.Cost;
 
-public abstract class AbstractAttack implements Attack {
+public abstract class AbstractAttack implements Attack, Serializable {
 
 	private String name, description, type;
 	private int baseDamage, hits;
 
 	private Array<String> targets;
 	private Array<Cost> costs;
+
+	private final String NAME = "name";
+	private final String DESC = "description";
+	private final String TYPE = "type";
+	private final String BDMG = "base damage";
+	private final String HITS = "hits";
+	private final String TGTS = "targets";
+	private final String CSTS = "costs";
 
 	protected AbstractAttack(String name) {
 		name(name);
@@ -92,6 +107,48 @@ public abstract class AbstractAttack implements Attack {
 	@Override
 	public Array<Cost> getCosts() {
 		return costs;
+	}
+
+	@Override
+	public void write(Json json) {
+		json.writeValue(NAME, name);
+		json.writeValue(DESC, description);
+		json.writeValue(TYPE, type);
+		json.writeValue(BDMG, baseDamage);
+		json.writeValue(HITS, hits);
+		json.writeValue(TGTS, targets);
+		json.writeValue(CSTS, costs);
+	}
+
+	@Override
+	public void read(Json json, JsonValue value) {
+		JsonValue child = value.child;
+		name(child.getString(NAME));
+		description(child.getString(description));
+		type(child.getString(TYPE));
+		baseDamage(child.getInt(BDMG));
+		hits(child.getInt(HITS));
+		createArrayFromJson(TGTS, json, child, targets);
+		createArrayFromJson(CSTS, json, child, costs);
+	}
+
+	@Override
+	public void printJson() {
+		printString(NAME, name);
+		printString(DESC, description);
+		printString(TYPE, type);
+		printInt(BDMG, baseDamage);
+		printInt(HITS, hits);
+
+		for (int i = 0; i < targets.size; i++) {
+			String target = targets.get(i);
+			System.out.println(target);
+		}
+		
+		for(int i = 0; i < costs.size; i++) {
+			Cost cost = costs.get(i);
+			cost.printJson();
+		}
 	}
 
 }

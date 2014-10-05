@@ -32,4 +32,7 @@ public interface Attack {
 	Array<String> getTargets();
 
 	Array<Cost> getCosts();
+
+	void printJson();
+
 }

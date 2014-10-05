@@ -12,25 +12,43 @@ public final class ScriptUtils {
 
 	}
 
-	public static String concatStrings(String base, String... strings) {
+	public static String concatStrings(String base, Array<String> strings) {
 		String newString = base;
-		for (String string : strings) {
-			newString = newString.concat(string);
-		}
+		iterateThroughStringArray(strings, newString);
 		return newString;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static void iterateThroughStringArray(Array<String> strings,
+			String string) {
+		for (int i = 0; i < strings.size; i++) {
+			string = string.concat(strings.get(i));
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes" })
 	public static void createArrayFromJson(String name, Json json,
 			JsonValue child, Array array) {
 		Array array2;
 		if (child.has(name)) {
 			array2 = json.fromJson(Array.class, child.get(name).toString());
 
-			for (Object object : array2) {
+			iterateThroughArrayToArray(array2, array);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static void iterateThroughArrayToArray(Array array2, Array array) {
+		Object object;
+		for (int i = 0; i < array2.size; i++) {
+			object = array2.get(i);
+			if (checkIfObjectIsNotNull(object)) {
 				array.add(object);
 			}
 		}
+	}
+
+	private static boolean checkIfObjectIsNotNull(Object object) {
+		return (object != null);
 	}
 
 	public static void printString(String name, String value) {
