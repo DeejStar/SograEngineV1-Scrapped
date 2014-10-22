@@ -12,9 +12,9 @@ bin/
 #libs/
 #war/WEB-INF/lib/
 
-#.classpath
-#.project
-#.settings/
-#.build
-#.dist
-#res/
+.classpath
+.project
+.settings/
+.build
+.dist
+res/
