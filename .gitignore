@@ -10,9 +10,9 @@ hs_err_pid*
 
 bin/
 #libs/
-#war/WEB-INF/lib/
+war/WEB-INF/lib/
 
-.classpath
+#.classpath
 .project
 .settings/
 .build
