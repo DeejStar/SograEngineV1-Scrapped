@@ -1,20 +1,20 @@
 *.class
 
 # Archives #
-*.jar
-*.war
-*.ear
+#*.jar
+#*.war
+#*.ear
 
 # Crash logs #
 hs_err_pid*
 
 bin/
-libs/
-war/WEB-INF/lib/
+#libs/
+#war/WEB-INF/lib/
 
-.classpath
-.project
-.settings/
-.build
-.dist
-res/
+#.classpath
+#.project
+#.settings/
+#.build
+#.dist
+#res/

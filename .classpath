@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="assets"/>
+	<classpathentry excluding="com/" kind="src" path="gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="libs/bodyeditor-loader.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-ai.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-android.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-headless.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-jglfw-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-jglfw.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-robovm.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/draygera/workspace/SograEngineV1/libs/ios"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/gdx-box2d-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-box2d.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-bullet-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-bullet.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-controllers-android.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-controllers-desktop-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-controllers-desktop.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-controllers.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-freetype-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-freetype.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-jnigen.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-tools.jar"/>
+	<classpathentry kind="lib" path="libs/gdx.jar"/>
+	<classpathentry kind="lib" path="libs/tween-engine-api.jar"/>
+	<classpathentry kind="lib" path="libs/sources/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-ai-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-backend-android-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-backend-headless-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-backend-jglfw-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-backend-lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-backend-robovm-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-box2d-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-bullet-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-controllers-android-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-controllers-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-freetype-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-jnigen-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/gdx-tools-sources.jar"/>
+	<classpathentry kind="lib" path="libs/sources/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="libs/robovm-cacerts-full.jar"/>
+	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-cocoatouch-sources.jar"/>
+	<classpathentry kind="lib" path="libs/robovm-cocoatouch.jar"/>
+	<classpathentry kind="lib" path="libs/robovm-compiler.jar"/>
+	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-objc-sources.jar"/>
+	<classpathentry kind="lib" path="libs/robovm-objc.jar"/>
+	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-rt-sources.jar"/>
+	<classpathentry kind="lib" path="libs/robovm-rt.jar"/>
+	<classpathentry kind="lib" path="/home/draygera/android-sdks/platforms/android-19/android.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/bodyeditor-loader.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-box2d-gwt-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-box2d-gwt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-controllers-gwt-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-controllers-gwt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx.jar"/>
+	<classpathentry kind="lib" path="/home/draygera/src/gwt-2.6.1/gwt-servlet.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/tween-engine-api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
