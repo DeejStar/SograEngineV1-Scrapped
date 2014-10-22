@@ -49,14 +49,14 @@
 	<classpathentry kind="lib" path="libs/sources/gdx-tools-sources.jar"/>
 	<classpathentry kind="lib" path="libs/sources/tween-engine-api-sources.jar"/>
 	<classpathentry kind="lib" path="libs/robovm-cacerts-full.jar"/>
-	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-cocoatouch-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Brandon/git/sograenginev1/libs/sources/robovm-cocoatouch-sources.jar"/>
 	<classpathentry kind="lib" path="libs/robovm-cocoatouch.jar"/>
 	<classpathentry kind="lib" path="libs/robovm-compiler.jar"/>
-	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-objc-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Brandon/git/sograenginev1/libs/sources/robovm-objc-sources.jar"/>
 	<classpathentry kind="lib" path="libs/robovm-objc.jar"/>
-	<classpathentry kind="lib" path="/home/draygera/workspace/SograEngineV1/libs/sources/robovm-rt-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Brandon/git/sograenginev1/libs/sources/robovm-rt-sources.jar"/>
 	<classpathentry kind="lib" path="libs/robovm-rt.jar"/>
-	<classpathentry kind="lib" path="/home/draygera/android-sdks/platforms/android-19/android.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Brandon/android-sdks/platforms/android-19/android.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/bodyeditor-loader-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/bodyeditor-loader.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
@@ -67,7 +67,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-controllers-gwt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx.jar"/>
-	<classpathentry kind="lib" path="/home/draygera/src/gwt-2.6.1/gwt-servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Brandon/Downloads/eclipse-java-luna-SR1-win32-x86_64/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.6.0/gwt-2.6.0/gwt-servlet.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/tween-engine-api-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/tween-engine-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
