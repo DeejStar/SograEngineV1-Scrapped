@@ -2,6 +2,9 @@ package com.soginteractive.editor.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.Json;
+import com.soginteractive.editor.test.ScriptingTest;
+import com.soginteractive.editor.util.managers.ScriptManager;
 import com.soginteractive.engine.core.AbstractScreen;
 import com.soginteractive.engine.menu.entities.Background;
 
@@ -11,17 +14,31 @@ public class MainScreen extends AbstractScreen {
 
 	private Background logo;
 
+	private ScriptManager scriptManager;
+	private ScriptingTest test;
+
+	private boolean tested;
+
 	public MainScreen(Game game, float width, float height,
 			boolean keepAspectRatio, Batch batch) {
 		super(game, width, height, keepAspectRatio, batch);
 
 		logo = (Background) new Background("Logo").stage(stage).stretch(true)
 				.texture("images/logo.png");
+
+		scriptManager = new ScriptManager("scripts");
+		test = new ScriptingTest(scriptManager);
+		tested = false;
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+
+//		if (!tested) {
+//			test.testScripter(new Json());
+//			tested = true;
+//		}
 
 		addProcessor();
 
