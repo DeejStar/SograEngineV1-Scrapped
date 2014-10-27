@@ -26,6 +26,10 @@ public interface Equipment {
 	Equipment element(Element element);
 
 	Equipment effect(Effect effect);
+	
+	Equipment path(String path);
+	
+	Equipment requirementPath(Requirement requirement, String reqPath);
 
 	String getName();
 
@@ -44,6 +48,10 @@ public interface Equipment {
 	Array<Element> getElements();
 
 	Array<Effect> getEffects();
+	
+	String getPath();
+	
+	String getRequirementName(Requirement requirement);
 	
 	void printJson();
 

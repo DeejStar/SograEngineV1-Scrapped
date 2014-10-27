@@ -26,7 +26,8 @@ public class EditorMain extends Game implements ActionListener, ItemListener {
 
 	private JMenuBar menuBar;
 	private JMenu menu, menu2, menu3, menu3Submenu1;
-	private JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5;
+	private JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5,
+			menuItem6;
 	private JMenuItem menu2Item1, menu2Item2, menu2Item3;
 	private JMenuItem menu3Item1;
 	private JMenuItem m3S1Item1, m3S1Item2, m3S1Item3, m3S1Item4, m3S1Item5,
@@ -56,6 +57,7 @@ public class EditorMain extends Game implements ActionListener, ItemListener {
 		menuItem3 = new JMenuItem("Save Project");
 		menuItem4 = new JMenuItem("Import Spreadsheet");
 		menuItem5 = new JMenuItem("Close Project");
+		menuItem6 = new JMenuItem("Quit");
 
 		menu2Item1 = new JMenuItem("Cut");
 		menu2Item2 = new JMenuItem("Copy");
@@ -73,7 +75,8 @@ public class EditorMain extends Game implements ActionListener, ItemListener {
 		m3S1Item6 = new JMenuItem("Event");
 
 		menu1ItemManager.menuItem(menuItem1).menuItem(menuItem2)
-				.menuItem(menuItem3).menuItem(menuItem4).menuItem(menuItem5);
+				.menuItem(menuItem3).menuItem(menuItem4).menuItem(menuItem5)
+				.menuItem(menuItem6);
 
 		menu2ItemManager.menuItem(menu2Item1).menuItem(menu2Item2)
 				.menuItem(menu2Item3);
@@ -117,6 +120,7 @@ public class EditorMain extends Game implements ActionListener, ItemListener {
 		for (int i = 0; i < menus.size; i++) {
 			menuBar.add(menus.get(i));
 		}
+
 	}
 
 	@Override
@@ -155,14 +159,24 @@ public class EditorMain extends Game implements ActionListener, ItemListener {
 				JMenuItemManager menuItemManager = menuManager
 						.getMenuItemManagers().get(j);
 
-				if (menuItemManager.isMenuItemActionPerformed(source)) {
-					System.out.println("Item clicked: " + e.getActionCommand());
-				}
+				// if (menuItemManager.isMenuItemActionPerformed(source)) {
+				// System.out.println("Item clicked: " + e.getActionCommand());
+				// }
+				checkMenuItemClicked(menuItemManager, source, e);
 
 			}
 
 		}
 
+	}
+
+	private void checkMenuItemClicked(JMenuItemManager manager,
+			JMenuItem source, ActionEvent e) {
+		if (manager.isMenuItemActionPerformed(source)) {
+			if (source.getActionCommand() == "New Project") {
+				System.out.println("Item clicked: " + e.getActionCommand());
+			}
+		}
 	}
 
 	@Override

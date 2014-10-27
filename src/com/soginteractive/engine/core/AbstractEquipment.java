@@ -16,6 +16,7 @@ import com.soginteractive.engine.core.misc.Restriction;
 public abstract class AbstractEquipment implements Equipment, Serializable {
 
 	protected String name, description, type, location;
+	protected String path;
 	protected Array<Requirement> requirements;
 	protected Array<Modifier> modifiers;
 	protected Array<Restriction> restrictions;
@@ -96,6 +97,18 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 	}
 
 	@Override
+	public Equipment path(String path) {
+		this.path = path;
+		return this;
+	}
+
+	@Override
+	public Equipment requirementPath(Requirement requirement, String reqPath) {
+
+		return this;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -138,6 +151,16 @@ public abstract class AbstractEquipment implements Equipment, Serializable {
 	@Override
 	public Array<Effect> getEffects() {
 		return effects;
+	}
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+
+	@Override
+	public String getRequirementName(Requirement requirement) {
+		return "";
 	}
 
 	@Override

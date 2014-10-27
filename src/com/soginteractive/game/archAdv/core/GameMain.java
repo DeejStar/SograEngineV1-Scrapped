@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.soginteractive.engine.core.equipment.managers.WeaponManager;
 import com.soginteractive.engine.core.util.managers.ScriptManager;
 import com.soginteractive.engine.menu.entities.managers.BackgroundManager;
 import com.soginteractive.engine.menu.managers.MenuManager;
@@ -19,7 +20,7 @@ public class GameMain implements ApplicationListener {
 	private Json json;
 
 	private MenuManager menuManager;
-	// private WeaponManager weaponManager;
+	private WeaponManager weaponManager;
 	private BackgroundManager backgroundManager;
 	private ScriptManager scriptManager;
 
@@ -38,12 +39,12 @@ public class GameMain implements ApplicationListener {
 
 		menuManager = new MenuManager("menus");
 
-		// weaponManager = new WeaponManager("weapons");
-
+		weaponManager = new WeaponManager("weapons");
 		backgroundManager = new BackgroundManager("backgrounds");
 		menuManager.backgroundManager(backgroundManager);
 
-		scriptManager = new ScriptManager("scripts").menuManager(menuManager);
+		scriptManager = new ScriptManager("scripts").menuManager(menuManager)
+				.weaponManager(weaponManager);
 
 		read = false;
 		menuChecked = false;

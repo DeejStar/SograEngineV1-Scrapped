@@ -7,6 +7,9 @@ import com.badlogic.gdx.utils.Json;
 import com.soginteractive.editor.util.ScriptWriter;
 import com.soginteractive.engine.core.AbstractManager;
 import com.soginteractive.engine.core.Scripter;
+import com.soginteractive.engine.core.equipment.Weapon;
+import com.soginteractive.engine.core.equipment.managers.WeaponManager;
+import com.soginteractive.engine.core.misc.Requirement;
 import com.soginteractive.engine.menu.Menu;
 import com.soginteractive.engine.menu.entities.Background;
 import com.soginteractive.engine.menu.entities.Text;
@@ -20,16 +23,27 @@ public class ScriptManager extends AbstractManager {
 	private Array<Scripter> menuWriters;
 	private Array<Menu> menus;
 
+	private Array<Scripter> weaponWriters;
+	private Array<Weapon> weapons;
+
 	private MenuManager menuManager;
+	private WeaponManager weaponManager;
 
 	public ScriptManager(String path) {
 		super(path);
 		menuWriters = new Array<Scripter>();
+		weaponWriters = new Array<Scripter>();
 	}
 
 	public ScriptManager menuManager(MenuManager menuManager) {
 		this.menuManager = menuManager;
 		createMenuWriters();
+		return this;
+	}
+
+	public ScriptManager weaponManager(WeaponManager weaponManager) {
+		this.weaponManager = weaponManager;
+		createWeaponWriters();
 		return this;
 	}
 
@@ -47,8 +61,8 @@ public class ScriptManager extends AbstractManager {
 
 	private void addToMenuWriters(Menu menu) {
 		String menuPath = path.concat(menuManager.getPath());
-		menuWriters.add(new ScriptWriter(concatStrings(menuPath, menu.getName(),
-				extension)));
+		menuWriters.add(new ScriptWriter(concatStrings(menuPath,
+				menu.getName(), extension)));
 		addPathToMenu(menu, menuPath);
 	}
 
@@ -56,8 +70,38 @@ public class ScriptManager extends AbstractManager {
 		menu.menuPath(menuPath);
 	}
 
+	private void createWeaponWriters() {
+		weapons = weaponManager.getWeapons();
+		iterateThroughWeapons();
+	}
+
+	private void iterateThroughWeapons() {
+		for (int i = 0; i < weapons.size; i++) {
+			Weapon weapon = weapons.get(i);
+			addToWeaponWriters(weapon);
+		}
+	}
+
+	private void addToWeaponWriters(Weapon weapon) {
+		String weaponPath = path.concat(weaponManager.getPath());
+		weaponWriters.add(new ScriptWriter(concatStrings(weaponPath,
+				weapon.getName(), extension)));
+		addPathToWeapon(weapon, weaponPath);
+	}
+
+	private void addPathToWeapon(Weapon weapon, String weaponPath) {
+		weapon.path(weaponPath);
+	}
+
 	public void writeScripts(Json json) {
-		writeMenus(json);
+		if (menuWriters != null) {
+			writeMenus(json);
+		}
+		
+		if(weaponWriters != null) {
+			writeWeapons(json);
+		}
+
 	}
 
 	private void writeMenus(Json json) {
@@ -181,6 +225,60 @@ public class ScriptManager extends AbstractManager {
 	private void addBackgroundPathToMenu(Menu menu, Background background,
 			String backgroundPath) {
 		menu.backgroundPath(background, backgroundPath);
+	}
+	
+	private void writeWeapons(Json json) {
+		iterateThroughWeaponWriters(json);
+	}
+	
+	private void iterateThroughWeaponWriters(Json json) {
+		for (int i = 0; i < weaponWriters.size; i++) {
+			ScriptWriter writer = (ScriptWriter) weaponWriters.get(i);
+			iterateThroughWeapons(json, writer);
+		}
+	}
+
+	private void iterateThroughWeapons(Json json, ScriptWriter writer) {
+		for(int i = 0; i < weapons.size; i++) {
+			Weapon weapon = weapons.get(i);
+			checkWeaponHasRequirements(json, writer, weapon);
+			
+		}
+	}
+	
+	private void checkWeaponHasRequirements(Json json, ScriptWriter writer, Weapon weapon) {
+		if(weapon.getRequirements() != null) {
+			String reqPath = "";
+			iterateThroughWeaponRequirementsToGetNames(json, writer, weapon, reqPath);
+		}
+	}
+	
+	private void iterateThroughWeaponRequirementsToGetNames(Json json,
+			ScriptWriter writer, Weapon weapon, String requirementPath) {
+		Array<Requirement> requirements = weapon.getRequirements();
+		Requirement requirement = null;
+
+		for (int i = 0; i < requirements.size; i++) {
+			requirement = requirements.get(i);
+//			requirementPath = concatStrings(weaponManager.getRequirementManager().getRequirementPath(),
+//					weapon.getRequirementName(requirement), extension);
+
+			addPathToWeapon(weapon, requirement, requirementPath);
+
+			writeWeaponRequirements(json, writer, requirement, requirementPath);
+		}
+	}
+
+	private void addPathToWeapon(Weapon weapon, Requirement requirement, String requirementPath) {
+		weapon.requirementPath(requirement, requirementPath);
+
+		//System.out.println(weapon.getRequirementPath(requirement));
+	}
+
+	private void writeWeaponRequirements(Json json, ScriptWriter writer, Requirement requirement,
+			String requirementPath) {
+		new ScriptWriter(concatStrings(writer.getParentPath(), requirementPath))
+				.writeScriptFile(json, requirement);
 	}
 
 }
