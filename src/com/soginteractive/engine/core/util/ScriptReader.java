@@ -21,9 +21,9 @@ public class ScriptReader extends AbstractScripter {
 	public void readScriptFile() {
 		stream = handle.readString();
 	}
-	
-	public void readScriptFile(UUID uuid) {
-		
+
+	public boolean containsID(UUID uuid) {
+		return stream.contains(uuid.toString());
 	}
 
 	public String getStream() {

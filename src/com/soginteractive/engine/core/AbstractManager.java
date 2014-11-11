@@ -3,6 +3,8 @@ package com.soginteractive.engine.core;
 import java.util.UUID;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.soginteractive.editor.util.ScriptWriter;
 import com.soginteractive.engine.core.util.ScriptReader;
 
 public abstract class AbstractManager implements Manager {
@@ -11,11 +13,13 @@ public abstract class AbstractManager implements Manager {
 
 	protected Array<Scripter> writers;
 	protected Array<Scripter> readers;
+	protected Array<UUID> uuids;
 
 	public AbstractManager(String path) {
 		path(path);
 		writers = new Array<Scripter>();
 		readers = new Array<Scripter>();
+		uuids = new Array<UUID>();
 	}
 
 	@Override
@@ -44,21 +48,37 @@ public abstract class AbstractManager implements Manager {
 	}
 
 	/**
-	 * All of these are left empty due to how each manager will write their scripts;
-	 * But, some managers might not use any scripts at all.
+	 * This is left empty due to how each manager will write their
+	 * scripts; But, some managers might not use any scripts at all.
 	 */
 	@Override
 	public void writeAllScripts() {
-		
-	}
-
-	@Override
-	public void writeScript(Scripter writer) {
 
 	}
 
 	@Override
-	public void writeScript(Scripter writer, UUID uuid) {
+	public void writeScript(Scripter writer, Object object) {
+		if (writer != null && writer instanceof ScriptWriter) {
+			writeScript(writer, new Json(), object);
+		}
+	}
+
+	@Override
+	public void writeScript(Scripter writer, Json json, Object object) {
+		writeScript(writer, json, object, false);
+	}
+
+	@Override
+	public void writeScript(Scripter writer, Json json, Object object,
+			boolean append) {
+		((ScriptWriter) writer).writeScriptFile(json, object, append);
+	}
+
+	/**
+	 * Write script only if its source contains a specific unique ID
+	 */
+	@Override
+	public void writeScript(UUID uuid) {
 
 	}
 
@@ -72,7 +92,7 @@ public abstract class AbstractManager implements Manager {
 	@Override
 	public void readScript(Scripter reader) {
 		if (reader != null && reader instanceof ScriptReader) {
-			readScript(reader, null);
+			((ScriptReader) reader).readScriptFile();
 		}
 	}
 
@@ -80,14 +100,8 @@ public abstract class AbstractManager implements Manager {
 	 * This is used to read script files based on their unique IDs.
 	 */
 	@Override
-	public void readScript(Scripter reader, UUID uuid) {
-		if (uuid == null) {
-			((ScriptReader) reader).readScriptFile();
-		}
+	public void readScript(UUID uuid) {
 
-		else {
-			((ScriptReader) reader).readScriptFile(uuid);
-		}
 	}
 
 	@Override
@@ -103,6 +117,11 @@ public abstract class AbstractManager implements Manager {
 	@Override
 	public Array<Scripter> getReaders() {
 		return readers;
+	}
+
+	@Override
+	public Array<UUID> getUUIDs() {
+		return uuids;
 	}
 
 	protected void checkPath(Manager manager) {
