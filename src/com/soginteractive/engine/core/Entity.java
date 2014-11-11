@@ -1,5 +1,7 @@
 package com.soginteractive.engine.core;
 
+import java.util.UUID;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -36,8 +38,10 @@ public interface Entity {
 
 	Vector2 getSize();
 
+	Actor getActor();
+	
 	Rectangle getBounds();
 
-	Actor getActor();
+	UUID getID();
 
 }

@@ -3,6 +3,8 @@ package com.soginteractive.engine.core;
 import static com.soginteractive.engine.core.util.ScriptUtils.printFloat;
 import static com.soginteractive.engine.core.util.ScriptUtils.printString;
 
+import java.util.UUID;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +16,7 @@ import com.soginteractive.engine.misc.Texture;
 public abstract class AbstractEntity implements Entity, Serializable {
 
 	private String name, path;
+	private UUID uuid = UUID.randomUUID();
 
 	protected Texture texture;
 	protected TextureRegion region;
@@ -21,10 +24,15 @@ public abstract class AbstractEntity implements Entity, Serializable {
 	protected float x, y, width, height;
 
 	private final String NAME = "name";
+	private final String ID = "id";
 	private final String X = "posX";
 	private final String Y = "posY";
 	private final String WID = "width";
 	private final String HGHT = "height";
+
+	public AbstractEntity() {
+		this("");
+	}
 
 	public AbstractEntity(String name) {
 		name(name);
@@ -120,8 +128,14 @@ public abstract class AbstractEntity implements Entity, Serializable {
 	}
 
 	@Override
+	public UUID getID() {
+		return uuid;
+	}
+
+	@Override
 	public void write(Json json) {
 		json.writeValue(NAME, name);
+		json.writeValue(ID, uuid);
 		json.writeValue(X, x);
 		json.writeValue(Y, y);
 		json.writeValue(WID, width);
@@ -133,6 +147,7 @@ public abstract class AbstractEntity implements Entity, Serializable {
 		JsonValue child = jsonData.child;
 
 		name(child.getString(NAME));
+		uuid = UUID.fromString(child.getString(ID));
 		x(child.getFloat(X));
 		y(child.getFloat(Y));
 		width(child.getFloat(WID));
@@ -141,6 +156,7 @@ public abstract class AbstractEntity implements Entity, Serializable {
 
 	public void printJson() {
 		printString(NAME, name);
+		printString(ID, uuid.toString());
 		printFloat(X, x);
 		printFloat(Y, y);
 		printFloat(WID, width);
