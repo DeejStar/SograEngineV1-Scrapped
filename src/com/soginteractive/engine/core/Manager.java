@@ -1,5 +1,7 @@
 package com.soginteractive.engine.core;
 
+import java.util.UUID;
+
 import com.badlogic.gdx.utils.Array;
 
 public interface Manager {
@@ -13,14 +15,14 @@ public interface Manager {
 	abstract void writeAllScripts();
 
 	abstract void writeScript(Scripter writer);
-	
-	abstract void writeScript(Scripter writer, Object object);
+
+	abstract void writeScript(Scripter writer, UUID uuid);
 
 	abstract void readAllScripts();
 
 	abstract void readScript(Scripter reader);
-	
-	abstract void readScript(Scripter reader, Object object);
+
+	abstract void readScript(Scripter reader, UUID uuid);
 
 	String getPath();
 
