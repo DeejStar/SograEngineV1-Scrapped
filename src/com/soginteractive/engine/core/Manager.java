@@ -9,11 +9,17 @@ public interface Manager {
 
 	Manager path(String path);
 
+	Manager manager(Manager manager);
+	
 	abstract Manager writer(Scripter writer);
 
 	abstract Manager reader(Scripter reader);
 
 	abstract void writeAllScripts();
+	
+	abstract void writeAllScripts(Json json);
+	
+	abstract void writeAllScripts(Json json, boolean append);
 
 	abstract void writeScript(Scripter writer, Object object);
 
@@ -37,5 +43,7 @@ public interface Manager {
 	abstract Array<Scripter> getReaders();
 
 	abstract Array<UUID> getUUIDs();
+	
+	abstract Array<Manager> getManagers();
 
 }

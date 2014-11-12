@@ -14,18 +14,26 @@ public abstract class AbstractManager implements Manager {
 	protected Array<Scripter> writers;
 	protected Array<Scripter> readers;
 	protected Array<UUID> uuids;
+	protected Array<Manager> managers;
 
 	public AbstractManager(String path) {
 		path(path);
 		writers = new Array<Scripter>();
 		readers = new Array<Scripter>();
 		uuids = new Array<UUID>();
+		managers = new Array<Manager>();
 	}
 
 	@Override
 	public Manager path(String path) {
 		this.path = path;
 		checkPath();
+		return this;
+	}
+	
+	@Override
+	public Manager manager(Manager manager) {
+		this.managers.add(manager);
 		return this;
 	}
 
@@ -48,11 +56,21 @@ public abstract class AbstractManager implements Manager {
 	}
 
 	/**
-	 * This is left empty due to how each manager will write their
-	 * scripts; But, some managers might not use any scripts at all.
+	 * This is left empty due to how each manager will write their scripts; But,
+	 * some managers might not use any scripts at all.
 	 */
 	@Override
 	public void writeAllScripts() {
+		writeAllScripts(new Json());
+	}
+
+	@Override
+	public void writeAllScripts(Json json) {
+		writeAllScripts(json, false);
+	}
+
+	@Override
+	public void writeAllScripts(Json json, boolean append) {
 
 	}
 
@@ -124,8 +142,41 @@ public abstract class AbstractManager implements Manager {
 		return uuids;
 	}
 
+	@Override
+	public Array<Manager> getManagers() {
+		return managers;
+	}
+
 	protected void checkPath(Manager manager) {
 		path = path.concat(manager.getPath());
 	}
 
+	protected void checkObjectForWriting(Scripter writer, Json json,
+			Object object) {
+		checkObjectForWriting(writer, json, object, false);
+	}
+
+	protected void checkObjectForWriting(Scripter writer, Json json,
+			Object object, boolean append) {
+		if (object != null) {
+			writeScript(writer, json, object, append);
+		}
+	}
+
+	protected void checkManagersForWriting(Json json) {
+		for (int i = 0; i < managers.size; i++) {
+			checkManagerForWriting(managers.get(i), json);
+		}
+	}
+
+	protected void checkManagerForWriting(Manager manager, Json json) {
+		checkManagerForWriting(manager, json, false);
+	}
+
+	protected void checkManagerForWriting(Manager manager, Json json,
+			boolean append) {
+		if (manager != null) {
+			manager.writeAllScripts(json, append);
+		}
+	}
 }

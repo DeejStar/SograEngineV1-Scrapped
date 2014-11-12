@@ -1,5 +1,6 @@
 package com.soginteractive.engine.core.managers;
 
+import com.badlogic.gdx.utils.Json;
 import com.soginteractive.engine.core.AbstractManager;
 import com.soginteractive.engine.core.misc.managers.EffectManager;
 import com.soginteractive.engine.core.misc.managers.ElementManager;
@@ -64,6 +65,12 @@ public abstract class EquipmentManager extends AbstractManager {
 
 	public EffectManager getEffectManager() {
 		return effectManager;
+	}
+
+	@Override
+	public void writeAllScripts(Json json) {
+		super.writeAllScripts(json);
+		checkManagersForWriting(json);
 	}
 
 }
